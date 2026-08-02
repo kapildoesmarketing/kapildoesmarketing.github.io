@@ -22,21 +22,48 @@ description: "Get in touch with Kapil Pidhwani — Marketing Strategist based in
     <section class="contact-form">
         <h3 class="h3 form-title">Contact Form</h3>
 
-        <form action="#" class="form" data-form>
+        <form id="contact-form" class="form" data-form>
             <div class="input-wrapper">
-                <input type="text" name="fullname" class="form-input" placeholder="Full name" required
-                    data-form-input>
-                <input type="email" name="email" class="form-input" placeholder="Email Address" required
-                    data-form-input>
+                <input type="text" name="entry.1905094662" id="cf-name" class="form-input" placeholder="Full name" required data-form-input>
+                <input type="email" name="entry.1189365653" id="cf-email" class="form-input" placeholder="Email Address" required data-form-input>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required
-                data-form-input=""></textarea>
+            <textarea name="entry.1894524126" id="cf-message" class="form-input" placeholder="Your Message" required data-form-input=""></textarea>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
                 <ion-icon name="paper-plane"></ion-icon>
                 <span>Send Message</span>
             </button>
         </form>
+
+        <p id="cf-success" style="display:none; margin-top:16px; color:var(--orange-yellow-crayola); font-size:var(--fs-6);">
+            ✅ Message sent! I'll get back to you soon.
+        </p>
+        <p id="cf-error" style="display:none; margin-top:16px; color:var(--bittersweet-shimmer); font-size:var(--fs-6);">
+            ❌ Something went wrong. Please email me directly at kapildoesmarketing@gmail.com
+        </p>
     </section>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+
+            fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSfIgMPnb_gprYszpZBwIjx1j5HgNX0K8Gc-lWgoGE2p-03MAw/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: data
+            })
+            .then(function () {
+                form.reset();
+                form.style.display = 'none';
+                document.getElementById('cf-success').style.display = 'block';
+            })
+            .catch(function () {
+                document.getElementById('cf-error').style.display = 'block';
+            });
+        });
+    </script>
 </article>
+
