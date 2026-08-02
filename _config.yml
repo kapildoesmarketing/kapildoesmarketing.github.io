@@ -1,0 +1,18 @@
+title: Kapil Pidhwani
+description: "Marketing Strategist | Google Apprentice | Data-driven GTM Execution"
+url: "https://kapildoesmarketing.github.io"
+baseurl: "/portfolio"
+
+# Build settings
+theme: null
+permalink: /notes/:year/:month/:day/:title/
+
+# Plugins allowed on GitHub Pages
+plugins:
+  - jekyll-feed
+
+# Exclude source files from build output
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

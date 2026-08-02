@@ -1,0 +1,9 @@
+<nav class="navbar">
+    <ul class="navbar-list">
+        <li class="navbar-item"><a href="{{ site.baseurl }}/index.html" class="navbar-link {% if page.nav == 'about' %}active{% endif %}">About</a></li>
+        <li class="navbar-item"><a href="{{ site.baseurl }}/background.html" class="navbar-link {% if page.nav == 'background' %}active{% endif %}">Background</a></li>
+        <li class="navbar-item"><a href="{{ site.baseurl }}/portfolio.html" class="navbar-link {% if page.nav == 'portfolio' %}active{% endif %}">Portfolio</a></li>
+        <li class="navbar-item"><a href="{{ site.baseurl }}/blog.html" class="navbar-link {% if page.nav == 'notes' or layout.name == 'post' %}active{% endif %}">Notes</a></li>
+        <li class="navbar-item"><a href="{{ site.baseurl }}/contact.html" class="navbar-link {% if page.nav == 'contact' %}active{% endif %}">Contact</a></li>
+    </ul>
+</nav>
