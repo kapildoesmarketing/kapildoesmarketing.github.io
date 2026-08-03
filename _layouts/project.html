@@ -7,7 +7,7 @@ layout: default
         <a href="{{ site.baseurl }}/portfolio/" class="back-link" style="display:inline-flex;align-items:center;gap:6px;color:var(--orange-yellow-crayola);font-size:var(--fs-6);margin-bottom:16px;text-decoration:none;">
             <ion-icon name="arrow-back-outline"></ion-icon> Back to Portfolio
         </a>
-        <h2 class="h2 article-title">{{ page.title }}</h2>
+        <h1 class="h2 article-title">{{ page.title }}</h1>
         <div class="blog-meta" style="margin-top:8px;">
             <p class="blog-category">{{ page.category }}</p>
             {% if page.year %}<span class="dot"></span><time>{{ page.year }}</time>{% endif %}
@@ -23,4 +23,24 @@ layout: default
     <section class="post-content" style="margin-top:24px;line-height:1.8;color:var(--light-gray);">
         {{ content }}
     </section>
+
+    <!-- JSON-LD Structured Data: CreativeWork Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": {{ page.title | jsonify }},
+      "description": {{ page.excerpt | strip_html | strip_newlines | jsonify }},
+      "author": {
+        "@type": "Person",
+        "name": "Kapil Pidhwani",
+        "url": "https://kapilpidhwani.in"
+      },
+      "image": "{{ page.image | default: 'https://i.postimg.cc/JzBWVhW4/my-avatar.png' | absolute_url }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url | absolute_url }}"
+      }
+    }
+    </script>
 </article>
