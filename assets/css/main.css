@@ -4403,3 +4403,18 @@ button {
 .sf-main:hover [data-sf-glow]::before {
   display: none;
 }
+
+/* At a glance: rows share the tray height evenly instead of floating in the middle */
+.sf-glance-table {
+  justify-content: stretch;
+}
+.sf-glance-table .sf-detail-kv-row {
+  flex: 1 1 0;
+  align-items: center;
+}
+/* Mobile: the thumbnail itself expands the Sankey, so hide the duplicate icon button */
+@media (max-width: 767px) {
+  .sf-project-section .sf-section-head .sf-sankey-expand-btn {
+    display: none;
+  }
+}
