@@ -1,37 +1,14 @@
----
-layout: default
-title: Portfolio
-nav: portfolio
-permalink: /portfolio/
-description: "Kapil Pidhwani's portfolio — GTM strategy, marketing, and growth projects."
----
-
-<article class="portfolio active" data-page="portfolio">
-    <header>
-        <h1 class="h2 article-title">Portfolio</h1>
-    </header>
-
-    <section class="blog-posts">
-        <ul class="blog-posts-list">
-            {% for project in site.projects %}
-            <li class="blog-post-item">
-                <a href="{{ site.baseurl }}{{ project.url }}">
-                    <figure class="blog-banner-box">
-                        <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy">
-                    </figure>
-
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <p class="blog-category">{{ project.category }}</p>
-                            {% if project.year %}<span class="dot"></span><time>{{ project.year }}</time>{% endif %}
-                        </div>
-
-                        <h3 class="h3 blog-item-title">{{ project.title }}</h3>
-                        <p class="blog-text">{{ project.excerpt | strip_html | truncatewords: 30 }}</p>
-                    </div>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </section>
-</article>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to Selected Work</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://kapilpidhwani.in/work/">
+  <meta http-equiv="refresh" content="0; url=/work/">
+  <script>window.location.replace("/work/");</script>
+</head>
+<body style="background:#0a0a0a;color:#fafafa;font-family:sans-serif;padding:40px;">
+  <p>Redirecting to <a href="/work/" style="color:#dc9058;">/work/</a>...</p>
+</body>
+</html>

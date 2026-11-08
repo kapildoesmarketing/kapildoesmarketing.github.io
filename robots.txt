@@ -1,4 +1,33 @@
+# robots.txt for kapilpidhwani.in (2026 Search & AI Citation Policy)
 User-agent: *
+Allow: /
+
+# Explicitly allow Google, Bing & AI Search / Answer Engine Citation Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://kapilpidhwani.in/sitemap.xml

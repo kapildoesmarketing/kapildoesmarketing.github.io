@@ -1,69 +1,14 @@
----
-layout: default
-title: Contact
-nav: contact
-permalink: /contact/
-description: "Get in touch with Kapil Pidhwani — Marketing Strategist based in Gurgaon, India."
----
-
-<article class="contact active" data-page="contact">
-    <header>
-        <h1 class="h2 article-title">Contact</h1>
-    </header>
-
-    <section class="mapbox" data-mapbox>
-        <figure>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.7163731713437!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1683645600000!5m2!1sen!2sin"
-                width="400" height="300" loading="lazy"></iframe>
-        </figure>
-    </section>
-
-    <section class="contact-form">
-        <h3 class="h3 form-title">Contact Form</h3>
-
-        <form id="contact-form" class="form" data-form>
-            <div class="input-wrapper">
-                <input type="text" name="entry.1905094662" id="cf-name" class="form-input" placeholder="Full name" required data-form-input>
-                <input type="email" name="entry.1189365653" id="cf-email" class="form-input" placeholder="Email Address" required data-form-input>
-            </div>
-
-            <textarea name="entry.1894524126" id="cf-message" class="form-input" placeholder="Your Message" required data-form-input=""></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-                <ion-icon name="paper-plane"></ion-icon>
-                <span>Send Message</span>
-            </button>
-        </form>
-
-        <p id="cf-success" style="display:none; margin-top:16px; color:var(--orange-yellow-crayola); font-size:var(--fs-6);">
-            ✅ Message sent! I'll get back to you soon.
-        </p>
-        <p id="cf-error" style="display:none; margin-top:16px; color:var(--bittersweet-shimmer); font-size:var(--fs-6);">
-            ❌ Something went wrong. Please email me directly at kapildoesmarketing@gmail.com
-        </p>
-    </section>
-
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const form = e.target;
-            const data = new FormData(form);
-
-            fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSfIgMPnb_gprYszpZBwIjx1j5HgNX0K8Gc-lWgoGE2p-03MAw/formResponse', {
-                method: 'POST',
-                mode: 'no-cors',
-                body: data
-            })
-            .then(function () {
-                form.reset();
-                form.style.display = 'none';
-                document.getElementById('cf-success').style.display = 'block';
-            })
-            .catch(function () {
-                document.getElementById('cf-error').style.display = 'block';
-            });
-        });
-    </script>
-</article>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to Contact Kapil Pidhwani</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://kapilpidhwani.in/contact/">
+  <meta http-equiv="refresh" content="0; url=/contact/">
+  <script>window.location.replace("/contact/");</script>
+</head>
+<body style="background:#0a0a0a;color:#fafafa;font-family:sans-serif;padding:40px;">
+  <p>Redirecting to <a href="/contact/" style="color:#dc9058;">/contact/</a>...</p>
+</body>
+</html>
