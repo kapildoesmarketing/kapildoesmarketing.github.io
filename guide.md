@@ -24,19 +24,26 @@
 
 ## 2. Design System and Visual Rules
 
-### 2.1 Monochrome Dark Palette
+### 2.1 Black Badge Palette (v3, approved 2026-11-08)
+Inspiration: Rolls-Royce Black Badge and Bugatti dark showrooms. Velvet black, matte cards, chrome hairlines, pearl text. No warm or gold tint anywhere in text.
 1. Use Dark Mode only (`html[data-sf-theme="dark"]`). Do not add a theme toggle.
-2. Use these exact surface and text tokens:
-   - Canvas background: `#0d0d0d` (`--token-5b5b05c3`)
-   - Outer tray background: `#141414` (`--token-e35fc293`)
-   - Inner card panel: `#1c1c1c` (`--token-b4c64ac2`)
-   - Elevated control / pill: `#242424` (`--token-0ffa333b`)
-   - Card border (`1px`): `#252525` (`--token-789768dc`)
-   - Primary text: `#f5f5f3` (`--token-9cf0210b`)
-   - Secondary text: `#9c9c9a` (`--token-944a5ffb`)
-   - Muted / tertiary text: `#7b7b79` (`--token-c4c9a226`)
-3. Keep all UI cards, charts, and diagrams strictly monochrome (black, white, and gray).
-4. Use green (`#2fc96f`) only for the live status dot.
+2. Surface ladder (each step is visible; never skip a step):
+   - Page: `#090909` (`--token-5b5b05c3`)
+   - Window: `#101011` (`--token-5bfb5dc5`)
+   - Tray / header shell: `#121213` (`--sf-tray`)
+   - Card: `#161617` (`--token-b4c64ac2`)
+   - Card hover: `#1c1c1c` (`--token-911b53df`)
+   - Raised control / pill / input: `#212123` (`--token-0ffa333b`, `--token-e35fc293`)
+3. Text: primary `#f7f7f7`, secondary `#a9a9a9`, tertiary `#7a7a7a`. Status green `#7fb389` only on the live dot.
+4. Hairlines: cards have no solid border. Each card gets a 1px **chrome gradient edge** (`::after`, white 9% at top to 3.5% mid to 4.5% bottom, `blur(0.35px)`) plus `inset 0 1px 0 rgba(255,255,255,0.07)` and a soft `0 30px 70px rgba(0,0,0,0.32)` shadow.
+5. Geometry: window `26px`, trays `22px`, cards `18px`, buttons `12px` radius.
+6. Buttons: primary is a pearl gradient (`#f1f1f1` to `#e2e2e2`) with an inner highlight; secondary is a matte gradient (`#1f1f20` to `#171718`). Hover transitions are `0.5s`.
+7. Light: **none by default.** No static spotlight, no card cursor glow, no torch. The surfaces carry the depth on their own. The torch (`.sf-cursor-light`) and the card glow (`[data-sf-glow]::before`) stay in the code but are disabled with `display: none`; enable only on Kapil's request.
+8. Grain: `body::after` SVG noise at `1.8%`, `soft-light`. Never raise it; it dulls text.
+9. Charts: Sankey bars use the `#sf-chrome` gradient defined inside each SVG; ribbons are white at 8%. Knowledge-graph node strokes and label halos use the card color `#161617`.
+10. Keep all UI cards, charts, and diagrams strictly monochrome.
+
+Rejected on the way here (do not reintroduce): warm bone/champagne palettes, star fields, aurora glows, large static spotlights, glass/blur cards.
 
 ### 2.2 Layout and Bento Geometry
 1. Keep the left sidebar (`.sf-sidebar`, `256px` width) fixed on desktop.
@@ -45,10 +52,9 @@
 4. Align multi-column bento splits at both the top and bottom edges (`align-items: stretch`).
 5. Reuse existing Sidefolio components (`.sf-services-grid`, `.sf-exp-row`, `.sf-article-row`, `.sf-stat-card`) before creating new CSS classes.
 
-### 2.3 Cursor-Following Card Glow (`[data-sf-glow]`)
-1. Apply the monochrome white cursor glow only to right-side gray cards inside `#main-content`.
-2. Never apply the cursor glow to `.sf-sidebar`, `.sf-hero-portrait`, or `.sf-work-card` photo frames.
-3. Keep the border glow subtle (`::after` peak opacity `0.13`, `380px` radius) and the surface light soft (`::before` peak opacity `0.055`, `520px` radius) so card edges never look sharp.
+### 2.3 Cursor Light (disabled)
+1. The card glow (`[data-sf-glow]`) and the torch (`.sf-cursor-light`) are both turned off since 2026-11-08. Kapil reviewed the site with and without them and chose the still surfaces.
+2. If re-enabled, apply only to right-side gray cards inside `#main-content`, never to `.sf-sidebar`, `.sf-hero-portrait`, or photo frames.
 
 ### 2.4 Photography and Brand Logos
 1. Use dark studio hardware mockups (`16:9`, WebP with `440w`, `880w`, `1320w`, and `2752w` `srcset`) for project cards and headers.

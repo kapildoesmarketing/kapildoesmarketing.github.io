@@ -107,25 +107,25 @@
     :root,
     html[data-sf-theme="dark"] {
       color-scheme: dark;
-      --token-5b5b05c3: #0a0a0a;
-      --token-5bfb5dc5: #141414;
-      --token-911b53df: #181818;
-      --token-b4c64ac2: #1a1a1a;
-      --token-a7905eaa: #0c0c0c;
-      --token-789768dc: #ffffff0f;
-      --token-e35fc293: #242424;
-      --token-9cf0210b: #fafafa;
-      --token-8ec32d6c: #0a0a0a;
-      --token-4459319f: #8a8a8a;
-      --token-944a5ffb: #a1a1a1;
-      --token-c4c9a226: #8a8a8a;
-      --token-a3099ef8: #ffffff;
-      --token-80a1e60a: #0a0a0a;
-      --token-0ffa333b: #242424;
-      --token-d3aabc30: #dc9058;
-      --token-6b7ceae0: #3d2a24;
-      --token-7d81dced: #ff943d33;
-      --token-81612285: #22c55e;
+      --token-5b5b05c3: #090909;
+      --token-5bfb5dc5: #101011;
+      --token-911b53df: #1c1c1c;
+      --token-b4c64ac2: #161617;
+      --token-a7905eaa: #090909;
+      --token-789768dc: rgba(255, 255, 255, 0.07);
+      --token-e35fc293: #212123;
+      --token-9cf0210b: #f7f7f7;
+      --token-8ec32d6c: #090909;
+      --token-4459319f: #7a7a7a;
+      --token-944a5ffb: #a9a9a9;
+      --token-c4c9a226: #a9a9a9;
+      --token-a3099ef8: #f7f7f7;
+      --token-80a1e60a: #090909;
+      --token-0ffa333b: #212123;
+      --token-d3aabc30: #f7f7f7;
+      --token-6b7ceae0: #1c1c1e;
+      --token-7d81dced: rgba(255, 255, 255, 0.2);
+      --token-81612285: #7fb389;
     }
 
     * {
@@ -1490,9 +1490,24 @@
         min-width: 44px;
       }
     }
+
+    /* Black Badge design system (v3): grain, chrome hairlines, pearl buttons, torch */
+    body::after { content: ""; position: fixed; inset: 0; z-index: 2000; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); background-size: 240px 240px; opacity: 0.018; mix-blend-mode: soft-light; }
+    .sf-page-wrapper { background: transparent; position: relative; z-index: 1; }
+    .sf-window { background-color: #101011; border-radius: 26px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); }
+    .sf-tray { background-color: #121213; border-radius: 22px; }
+    .sf-panel, .sf-nav-panel, .sf-profile-panel, .sf-actions-panel, .sf-slide-stage { position: relative; border-color: transparent; border-radius: 18px; background-clip: padding-box; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 70px rgba(0,0,0,0.32); }
+    .sf-panel::after, .sf-nav-panel::after, .sf-profile-panel::after, .sf-actions-panel::after, .sf-slide-stage::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; padding: 1px; background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.035) 55%, rgba(255,255,255,0.045)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; filter: blur(0.35px); }
+    .sf-btn-primary, .sf-footer-sub-btn { background: linear-gradient(180deg, #f1f1f1, #e2e2e2); color: #090909; border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 10px 24px rgba(0,0,0,0.4); }
+    .sf-btn-secondary { background: linear-gradient(180deg, #1f1f20, #171718); border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+    .sf-cursor-light { display: none; position: fixed; inset: 0; z-index: 3; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(260px 260px at var(--sx, 50%) var(--sy, 20%), rgba(255,255,255,0.11) 0%, rgba(255,255,255,0.06) 28%, rgba(255,255,255,0.02) 55%, rgba(255,255,255,0) 72%); animation: sf-torch 2.8s ease-in-out infinite; }
+    @keyframes sf-torch { 0%,100% { opacity: 1 } 37% { opacity: 0.86 } 61% { opacity: 0.94 } 80% { opacity: 0.9 } }
+    @media (hover: none) { .sf-cursor-light { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .sf-cursor-light { animation: none; } }
   </style>
 </head>
 <body>
+  <i class="sf-cursor-light" aria-hidden="true"></i>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXGGS4FV"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1736,7 +1751,7 @@
                   </div>
                   <h1 class="sf-slide-title sf-slide-title-cover">
                     <span>How to Fix Your LinkedIn Profile</span>
-                    <span class="sf-title-muted">in 15 Steps.</span>
+                    <span class="sf-title-muted" style="white-space: nowrap;">in 15 Steps.</span>
                   </h1>
                   <p class="sf-slide-subtitle">
                     Most LinkedIn profiles read like dusty digital resumes. This playbook walks you step by step through turning your profile into a high-trust landing page that attracts recruiters, founders and inbound opportunities.
@@ -2853,6 +2868,14 @@ No pressure at all, and if it helps save time, I'm happy to share a quick bullet
         if (dx > 0 && currentSlide > 0) goToSlide(currentSlide - 1);
       }, { passive: true });
 
+
+      (function initTorch() {
+        const light = document.querySelector('.sf-cursor-light');
+        if (!light || !window.matchMedia('(hover: hover)').matches) return;
+        let tx = window.innerWidth * 0.5, ty = window.innerHeight * 0.2, x = tx, y = ty;
+        window.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; }, { passive: true });
+        (function tick() { x += (tx - x) * 0.22; y += (ty - y) * 0.22; light.style.setProperty('--sx', x + 'px'); light.style.setProperty('--sy', y + 'px'); window.requestAnimationFrame(tick); })();
+      })();
       // 4. Interactive 15-Point Audit Checklist (Persisted in localStorage)
       let checkedItems = {};
       try {

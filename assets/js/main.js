@@ -218,6 +218,21 @@
     btn.addEventListener('click', closeLightbox);
   });
 
+  /* Deisgned by Kapil Pidhwani: cursor torch (ceiling: one rAF loop per page; upgrade path: pause when tab hidden). */
+  (function initTorch() {
+    const light = document.querySelector('.sf-cursor-light');
+    if (!light || !window.matchMedia('(hover: hover)').matches) return;
+    let tx = window.innerWidth * 0.5, ty = window.innerHeight * 0.2, x = tx, y = ty;
+    window.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; }, { passive: true });
+    (function tick() {
+      x += (tx - x) * 0.22;
+      y += (ty - y) * 0.22;
+      light.style.setProperty('--sx', x + 'px');
+      light.style.setProperty('--sy', y + 'px');
+      window.requestAnimationFrame(tick);
+    })();
+  })();
+
   // Floating Back to Top button (appears on scroll in bottom-right corner)
   function updateBackToTopVisibility() {
     const show = (window.scrollY || window.pageYOffset || 0) > 220;
@@ -1093,7 +1108,7 @@
             ctx.fillStyle = '#fafafa';
             ctx.fill();
             ctx.lineWidth = 1.5;
-            ctx.strokeStyle = '#141414';
+            ctx.strokeStyle = '#161617';
             ctx.stroke();
           } else if (n.isShared) {
             // Shared bridge skill dot (refined silver-white with delicate outer ring)
@@ -1110,7 +1125,7 @@
             ctx.fillStyle = (isFocusedSelf || (focusNode && isNodeActive)) ? '#fafafa' : '#d4d4d8';
             ctx.fill();
             ctx.lineWidth = 1.25;
-            ctx.strokeStyle = '#141414';
+            ctx.strokeStyle = '#161617';
             ctx.stroke();
           } else {
             // Venture-specific skill dot (minimal gunmetal/silver dot)
@@ -1126,7 +1141,7 @@
             ctx.fillStyle = (focusNode && isNodeActive) ? '#e4e4e7' : '#71717a';
             ctx.fill();
             ctx.lineWidth = 1.25;
-            ctx.strokeStyle = '#141414';
+            ctx.strokeStyle = '#161617';
             ctx.stroke();
           }
 
@@ -1141,10 +1156,10 @@
 
           const labelY = n.y + n.radius + (n.type === 'venture' ? 10 : 7);
 
-          ctx.shadowColor = 'rgba(20, 20, 20, 0.95)';
+          ctx.shadowColor = 'rgba(22, 22, 23, 0.95)';
           ctx.shadowBlur = 6;
           ctx.lineWidth = 3;
-          ctx.strokeStyle = 'rgba(20, 20, 20, 0.88)';
+          ctx.strokeStyle = 'rgba(22, 22, 23, 0.88)';
           ctx.strokeText(n.label, n.x, labelY);
 
           ctx.fillStyle = n.type === 'venture'
@@ -1391,6 +1406,7 @@
     console.assert(!document.querySelector('.sf-actions-tray [name="Start a project"]'), 'Sidebar primary CTA should not be present');
     console.assert(views.length === 1 && hiddenViews.length === 0, 'Modular page must contain exactly 1 active view and 0 hidden views', views.length, hiddenViews.length);
     console.assert(Boolean(externalCss) && Boolean(externalJs), 'Modular page must link /assets/css/main.css and /assets/js/main.js');
+    console.assert(Boolean(document.querySelector('.sf-cursor-light')), 'Black Badge torch layer must exist in the shell');
     console.assert(Boolean(footerEl) && Boolean(legalPrivacyLink), 'Global Sidefolio footer and /privacy-policy/ link must exist');
     console.assert(searchItemsCount > 10, 'Command palette search must populate items', searchItemsCount);
     console.assert(Boolean(schemaScript && JSON.parse(schemaScript.textContent)['@graph']), 'Valid JSON-LD Schema.org @graph must exist');
