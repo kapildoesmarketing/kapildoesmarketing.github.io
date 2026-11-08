@@ -419,45 +419,192 @@
               </div>
             </div>
 
-            <!-- 3. STANDARDIZED 3-COLUMN SIDEFOLIO BENTO BREAKDOWN -->
-            <div class="sf-services-grid" data-framer-name="Project Breakdown">
-              <div class="sf-tray sf-service-tray">
-                <div class="sf-panel sf-service-panel">
-                  <div class="sf-service-top">
-                    <h3 class="sf-service-title">The Problem</h3>
-                    <p class="sf-service-desc">Indian startup funding data is either locked behind $5,000/year institutional terminals or scattered across unstructured press articles and rumors.</p>
+            <!-- 3. 3-COLUMN EXECUTIVE BENTO BREAKDOWN (Native Sidefolio Service Cards with Icons & Quantified Strips) -->
+            <div class="sf-services-outer-tray" data-framer-name="Executive Summary">
+              <div class="sf-services-grid">
+                <div class="sf-service-tray">
+                  <div class="sf-service-panel">
+                    <div class="sf-service-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <div class="sf-service-body">
+                      <h3 class="sf-service-title">The $5,000/yr Data Wall</h3>
+                      <p class="sf-service-desc">Indian startup funding data was locked behind expensive institutional terminals or scattered across unverified press articles.</p>
+                    </div>
+                  </div>
+                  <div class="sf-service-strip">
+                    <span class="sf-service-cta">$5,000/yr paywall replaced</span>
+                    <span class="sf-service-price">The Problem</span>
                   </div>
                 </div>
-                <div class="sf-strip">
-                  <p class="sf-text-12 sf-color-secondary">01 · Market Gap</p>
-                  <p class="sf-text-12 sf-color-tertiary">Information asymmetry</p>
-                </div>
-              </div>
-              <div class="sf-tray sf-service-tray">
-                <div class="sf-panel sf-service-panel">
-                  <div class="sf-service-top">
-                    <h3 class="sf-service-title">The Architecture</h3>
-                    <p class="sf-service-desc">Built a structured Google Sheets master database across 21 quarterly tabs that feeds a fast, zero-server web app and weekly market intelligence.</p>
+                <div class="sf-service-tray">
+                  <div class="sf-service-panel">
+                    <div class="sf-service-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    </div>
+                    <div class="sf-service-body">
+                      <h3 class="sf-service-title">Zero-Server Sheet Engine</h3>
+                      <p class="sf-service-desc">Engineered a 21-quarter relational Google Sheets database with automated deduplication feeding an instant static web app.</p>
+                    </div>
+                  </div>
+                  <div class="sf-service-strip">
+                    <span class="sf-service-cta">21 quarterly tabs · <50ms</span>
+                    <span class="sf-service-price">The System</span>
                   </div>
                 </div>
-                <div class="sf-strip">
-                  <p class="sf-text-12 sf-color-secondary">02 · System Built</p>
-                  <p class="sf-text-12 sf-color-tertiary">Google Sheets + Web Engine</p>
-                </div>
-              </div>
-              <div class="sf-tray sf-service-tray">
-                <div class="sf-panel sf-service-panel">
-                  <div class="sf-service-top">
-                    <h3 class="sf-service-title">The Impact</h3>
-                    <p class="sf-service-desc">2,690+ verified Indian startup funding rounds accessible for free with instant stage, sector, city and investor filtering.</p>
+                <div class="sf-service-tray">
+                  <div class="sf-service-panel">
+                    <div class="sf-service-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                    </div>
+                    <div class="sf-service-body">
+                      <h3 class="sf-service-title">2,690+ Deals Open-Sourced</h3>
+                      <p class="sf-service-desc">Indexed 1,840+ company profiles and 850+ trend reports with free stage, sector, city and investor filtering.</p>
+                    </div>
                   </div>
-                </div>
-                <div class="sf-strip">
-                  <p class="sf-text-12 sf-color-secondary">03 · Outcome</p>
-                  <p class="sf-text-12 sf-color-tertiary">100% Open Access</p>
+                  <div class="sf-service-strip">
+                    <span class="sf-service-cta">100% open access</span>
+                    <span class="sf-service-price">The Result</span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <!-- 4. BASELINE-ALIGNED 2/3 DECISIONS TRAY + 1/3 FULL-HEIGHT COLLABORATORS TRAY -->
+            <div class="sf-project-case-grid" data-framer-name="Decisions & Collaborators">
+              <!-- Left 2/3: Scannable 1-Line Architecture Trade-Offs -->
+              <div class="sf-tray sf-decisions-tray" data-framer-name="Key Decisions">
+                <div class="sf-strip">
+                  <p class="sf-text-12 sf-color-secondary">Key decisions &amp; trade-offs</p>
+                  <p class="sf-text-12 sf-color-tertiary">Why we built it this way</p>
+                </div>
+                <div class="sf-exp-list">
+                    <article class="sf-panel sf-exp-row sf-decision-exp-row">
+                      <div class="sf-exp-period">Storage</div>
+                      <div class="sf-exp-main">
+                        <div class="sf-exp-title-line">
+                          <h3 class="sf-exp-role">21-Tab Sheet Schema over Managed SQL</h3>
+                        </div>
+                        <p class="sf-exp-org">Weekly deal ingestion and manual QA take under 3 minutes with zero database hosting cost.</p>
+                      </div>
+                      <div class="sf-exp-loc">
+                        <span class="sf-decision-outcome-pill">$0 infra cost</span>
+                      </div>
+                    </article>
+                    <article class="sf-panel sf-exp-row sf-decision-exp-row">
+                      <div class="sf-exp-period">Latency</div>
+                      <div class="sf-exp-main">
+                        <div class="sf-exp-title-line">
+                          <h3 class="sf-exp-role">Client-Side Index over Server Pagination</h3>
+                        </div>
+                        <p class="sf-exp-org">Pre-compiled JSON payloads filter by stage, sector, city and investor instantly in the browser.</p>
+                      </div>
+                      <div class="sf-exp-loc">
+                        <span class="sf-decision-outcome-pill"><50ms filter</span>
+                      </div>
+                    </article>
+                    <article class="sf-panel sf-exp-row sf-decision-exp-row">
+                      <div class="sf-exp-period">Integrity</div>
+                      <div class="sf-exp-main">
+                        <div class="sf-exp-title-line">
+                          <h3 class="sf-exp-role">Multi-Source Audit over Raw Scraping</h3>
+                        </div>
+                        <p class="sf-exp-org">Filtered out 290+ duplicate press releases and unverified market rumors before indexing.</p>
+                      </div>
+                      <div class="sf-exp-loc">
+                        <span class="sf-decision-outcome-pill">2,690+ verified</span>
+                      </div>
+                    </article>
+                </div>
+              </div>
+
+              <!-- Right 1/3: Full-Height Collaborators Tray Matching Left Column -->
+              <div class="sf-tray sf-collaborators-tray" data-framer-name="Collaborators">
+                <div class="sf-strip">
+                  <p class="sf-text-12 sf-color-secondary">Collaborators</p>
+                  <p class="sf-text-12 sf-color-tertiary">Credits</p>
+                </div>
+                <div class="sf-collaborators-list">
+                    <a href="https://www.linkedin.com/in/kapilpidhwani/" target="_blank" rel="noopener noreferrer" class="sf-panel sf-collab-card">
+                      <div class="sf-collab-card-top">
+                        <div class="sf-collab-channel-left">
+                          <span class="sf-collab-avatar" aria-hidden="true">KP</span>
+                          <div class="sf-collab-channel-copy">
+                            <span class="sf-collab-channel-name">Kapil Pidhwani</span>
+                            <span class="sf-collab-channel-role">Product Strategy & Full-Stack Build</span>
+                          </div>
+                        </div>
+                        <span class="sf-text-13 sf-color-secondary" aria-hidden="true">&#8599;</span>
+                      </div>
+                      <p class="sf-collab-card-desc">Architected the 21-quarter Google Sheets relational schema, deduplication pipeline & static web engine.</p>
+                    </a>
+                    <a href="https://fundingly.in" target="_blank" rel="noopener noreferrer" class="sf-panel sf-collab-card">
+                      <div class="sf-collab-card-top">
+                        <div class="sf-collab-channel-left">
+                          <span class="sf-collab-avatar" aria-hidden="true">FI</span>
+                          <div class="sf-collab-channel-copy">
+                            <span class="sf-collab-channel-name">Ecosystem Contributors</span>
+                            <span class="sf-collab-channel-role">Deal Submissions & Community QA</span>
+                          </div>
+                        </div>
+                        <span class="sf-text-13 sf-color-secondary" aria-hidden="true">&#8599;</span>
+                      </div>
+                      <p class="sf-collab-card-desc">Founders, analysts & operators submitting and verifying Indian startup funding rounds each week.</p>
+                    </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. CAPABILITIES (Interactive Knowledge Graph Pre-Highlighted for This Project) -->
+            <div class="sf-home-section" data-framer-name="Capabilities">
+              <div class="sf-section-head">
+                <div class="sf-section-head-left">
+                  <h2 class="sf-section-title">Capabilities</h2>
+                  <p class="sf-section-subtitle">Core skills behind Fundingly.in, highlighted across my broader capability network.</p>
+                </div>
+                <a href="/work/" class="sf-section-ghost-link" data-nav-trigger="work">
+                  <span>All projects</span>
+                  <span aria-hidden="true">&#8599;</span>
+                </a>
+              </div>
+
+              <div class="sf-tray sf-graph-tray" data-framer-name="Knowledge Graph">
+                <div class="sf-panel sf-graph-panel">
+                  <button type="button" class="sf-graph-reset-btn" data-graph-reset aria-label="Reset graph view" title="Reset view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                      <path d="M3 3v5h5"/>
+                    </svg>
+                  </button>
+                  <canvas id="sf-work-graph-canvas" class="sf-graph-canvas" data-default-project="fundingly" aria-label="Knowledge graph highlighting the 10 core skills connected to Fundingly.in">
+                    <h3>Fundingly.in &middot; Indian Startup Funding Intelligence & Short-Form Media Engine</h3>
+                  </canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. CLEAN TWO-BUTTON PROJECT PAGER (Previous Project / Next Project) -->
+            <div class="sf-project-pager" data-framer-name="Project Pager">
+              <a href="/work/toolity/" class="sf-btn-secondary">
+                <span class="sf-btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                  </svg>
+                </span>
+                <span class="sf-text-15">Previous project</span>
+              </a>
+              <a href="/work/toolity/" class="sf-btn-secondary">
+                <span class="sf-text-15">Next project</span>
+                <span class="sf-btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/>
+                    <path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+
           </section>
         </div><!-- /#view-subpage -->
 

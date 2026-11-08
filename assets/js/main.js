@@ -773,6 +773,10 @@
     let dragNode = null;
     let hoverNode = null;
     let selectedNode = null;
+    const defaultProjId = canvas.getAttribute('data-default-project');
+    if (defaultProjId && nodeById['venture:' + defaultProjId]) {
+      selectedNode = nodeById['venture:' + defaultProjId];
+    }
     let pointerDownPos = null;
     let animFrameId = null;
 
@@ -1206,6 +1210,30 @@
       }
     });
 
+    const resetBtn = canvas.parentElement.querySelector('[data-graph-reset]');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        selectedNode = (defaultProjId && nodeById['venture:' + defaultProjId])
+          ? nodeById['venture:' + defaultProjId]
+          : null;
+        hoverNode = null;
+        dragNode = null;
+        nodes.forEach(function (n) { n.vx = 0; n.vy = 0; });
+        computeAnchorsAndSeed(false);
+        simAlpha = 1.0;
+        for (let i = 0; i < 90; i++) {
+          stepPhysics();
+        }
+        renderGraph();
+        resetBtn.classList.remove('is-spinning');
+        void resetBtn.offsetWidth;
+        resetBtn.classList.add('is-spinning');
+        window.setTimeout(function () {
+          resetBtn.classList.remove('is-spinning');
+        }, 420);
+      });
+    }
+
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     if (animFrameId) window.cancelAnimationFrame(animFrameId);
@@ -1224,6 +1252,8 @@
       '.sf-work-header-panel',
       '.sf-stat-card',
       '.sf-service-tray',
+      '.sf-contact-channels-panel',
+      '.sf-collab-card',
       '.sf-article-row',
       '.sf-testimonial-tray',
       '.sf-graph-panel',
