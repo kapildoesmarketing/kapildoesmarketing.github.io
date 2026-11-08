@@ -16,15 +16,24 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://kapilpidhwani.in/links/">
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  
+  
+  
+  
   <link rel="alternate" type="text/markdown" href="https://kapilpidhwani.in/llms.txt" title="LLM Context &amp; Operator Directory">
 
   <!-- Open Graph / Social Preview -->
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Kapil Pidhwani">
   <meta property="og:title" content="Connect with Kapil Pidhwani - Links, Playbooks & Direct Contact">
-  <meta name="og:description" content="Kapil Pidhwani is a Marketing Strategist, Business Operations Leader and AI Builder (Google, ex-Amazon) with 6+ years shipping 100+ GTM and AI solutions that unlocked $10M+ in revenue.">
+  <meta property="og:description" content="Official networking hub for Kapil Pidhwani: connect on LinkedIn, save contact (.vcf), copy email, view interactive HTML playbooks, and explore GitHub.">
   <meta property="og:url" content="https://kapilpidhwani.in/links/">
   <meta property="og:image" content="https://kapilpidhwani.in/assets/images/og-home.png">
+  <meta property="og:image:alt" content="Kapil Pidhwani - Marketing Strategist, BizOps and AI Builder">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -66,7 +75,7 @@
       "mainEntity": {
         "@id": "https://kapilpidhwani.in/#person"
       },
-      "dateModified": "2026-11-07"
+      "dateModified": "2026-11-08"
     },
     {
       "@type": "Person",
@@ -146,7 +155,8 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
@@ -240,6 +250,17 @@
                     </svg>
                   </span>
                   <span class="sf-text-15 sf-nav-label">Links</span>
+                </a>
+
+                <!-- Contact (bottom tab bar only; desktop shows it in the Connect tray) -->
+                <a href="/contact/" class="sf-nav-link sf-nav-mobile-only" data-nav-item data-nav-route="contact">
+                  <span class="sf-nav-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M 2 0 L 18 0 C 19.1 0 20 0.9 20 2 L 20 14 C 20 15.1 19.1 16 18 16 L 2 16 C 0.9 16 0 15.1 0 14 L 0 2 C 0 0.9 0.9 0 2 0 Z" transform="translate(2 4)"/>
+                      <path d="M 20 0 L 10 7 L 0 0" transform="translate(2 6)"/>
+                    </svg>
+                  </span>
+                  <span class="sf-text-15 sf-nav-label">Contact</span>
                 </a>
               </div>
             </nav>
@@ -337,9 +358,10 @@
                       <span class="sf-hero-title-primary">Everywhere I build,</span><br>
                       <span class="sf-hero-title-muted">all in one place.</span>
                     </h1>
-                    <p class="sf-hero-bio">
+                    <p class="sf-hero-bio sf-hero-bio-long">
                       Connect on LinkedIn, explore my interactive playbooks and web apps, or grab my direct contact details below. Based in Gurgaon, India.
                     </p>
+                    <p class="sf-hero-bio sf-hero-bio-short">LinkedIn, playbooks, web apps and direct contact. Based in Gurgaon, India.</p>
                   </div>
                   <div class="sf-hero-actions">
                     <a href="/contact/" class="sf-btn-primary" data-nav-trigger="contact">
@@ -396,6 +418,7 @@
                     src="/assets/images/kapil-pidhwani.jpg"
                     alt="Portrait of Kapil Pidhwani"
                     class="sf-hero-portrait-img"
+                  fetchpriority="high"
                   >
                 </div>
               </div>
@@ -688,6 +711,17 @@
         <button type="button" class="sf-search-esc" data-close-search>ESC</button>
       </div>
       <div class="sf-search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+  <!-- Full-resolution image lightbox (opened by [data-open-lightbox]) -->
+  <div class="sf-search-modal sf-lightbox" id="image-lightbox" hidden>
+    <div class="sf-search-backdrop" data-close-lightbox></div>
+    <div class="sf-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Full resolution image">
+      <button type="button" class="sf-search-esc sf-lightbox-close" data-close-lightbox aria-label="Close">ESC</button>
+      <div class="sf-lightbox-scroll">
+        <img class="sf-lightbox-img" src="" alt="" decoding="async">
+      </div>
+      <p class="sf-lightbox-hint">Pinch or scroll to zoom. Full 2752px master.</p>
     </div>
   </div>
 

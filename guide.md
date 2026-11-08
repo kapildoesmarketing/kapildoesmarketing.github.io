@@ -119,6 +119,7 @@ Keep the 6-part visual layout identical when adding new categories, and adapt th
 ### 5.1 Monochrome Sankey Diagram (`.sf-sankey-svg`)
 1. Render 5 columns of nodes (`rect` bars in `#d4d4d8`, active `#ffffff`) connected by cubic Bezier ribbons.
 2. Highlight the complete end-to-end upstream and downstream path when a user hovers any node or ribbon.
+3. Below `1024px`, the SVG scales to 100% width and `.sf-sankey-expand-btn` (`[data-open-sankey]`) appears. It opens `#sankey-modal`, a full-screen copy with horizontal scroll.
 
 ### 5.2 Force-Directed Knowledge Graph (`#sf-work-graph-canvas`)
 1. Connect each project hub to 10 core skills (shared skills bridge the center; unique skills fan outward).
@@ -127,9 +128,63 @@ Keep the 6-part visual layout identical when adding new categories, and adapt th
 
 ---
 
-## 6. Forms, SEO, and Deployment Protocol
+## 6. Responsive System (Mobile, Tablet, Desktop)
+
+### 6.1 Breakpoints
+| Range | Name | Shell | Trays |
+| :--- | :--- | :--- | :--- |
+| `>= 1024px` | Desktop | Fixed `260px` left sidebar + main window | Full multi-column layouts |
+| `640-1023px` | Tablet | Sidebar collapses to the bottom tab bar; main is full width | `services`, `contact`, `project-case`, `footer`, `exp-row` go 1 column; `tools` go 2 columns |
+| `<= 767px` | Mobile | Same bottom tab bar | Hero rows stack; `stats`, `work`, `tools` go 1 column; `clients` go 2 columns |
+
+Never add a new `@media` value. Use `1023px` or `767px` only.
+
+### 6.2 Bottom Tab Bar (`<= 1023px`)
+1. Six items: Home, About, Work, Playbooks, Links, Contact. Icon (`18px`) sits above a `10.5px` label. Each item is `50px` tall.
+2. The Contact item carries `.sf-nav-mobile-only`. It is hidden on desktop, where Contact lives in the Connect tray.
+3. The bar respects `env(safe-area-inset-bottom)`. Page content keeps `84px` bottom padding so nothing hides behind it.
+
+### 6.3 Touch Rules (`<= 1023px`)
+1. Tap targets are at least `44px` tall or have a `44px` pseudo-element hit zone (deck progress dots).
+2. No visible text below `12px`.
+3. Form inputs are `16px` to stop iOS focus zoom.
+
+### 6.4 Mobile Cover Hero (`<= 767px`, the 5 main pages)
+1. The shared header becomes an **editorial cover**: the portrait fills the 460px card, the copy sits on a bottom gradient that starts below the face (`object-position: center 12%`, gradient from 28% to 100%).
+2. Each page has two bios: `.sf-hero-bio-long` (desktop) and `.sf-hero-bio-short` (mobile, max 2 sentences). Add both when you create a page.
+3. Hero actions render as a 2-column grid with 14px labels that never wrap. Four buttons form a 2×2 grid.
+4. Stats collapse to one 3-up row: number plus the short top label (`Projects`, `Experience`, `Clients`). The long caption and icon hide.
+5. Project pages (`.sf-project-hero-row`) keep the stacked copy-above-image layout.
+
+### 6.5 Ultra-HD Showcase Images
+1. Every showcase ships a 6-step WebP ladder: `440, 880, 1320, 1760, 2200, 2752w`, quality `96`, Lanczos plus a light unsharp mask on downscaled sizes. Masters are the `2752x1536` PNGs in the design archive.
+2. `sizes` carries a **1.6x zoom bias**: `(max-width: 767px) 160vw, (max-width: 1023px) 80vw, <slot>px`. A 3x phone loads `2200w`, so pinch-zoom stays crisp.
+3. Every showcase has a `.sf-zoom-btn` (`[data-open-lightbox="<2752w file>"]`) that opens `#image-lightbox` with the full master. The button is visible on touch and appears on hover on desktop.
+4. Project pages preload the hero with `imagesrcset` and `imagesizes`.
+
+### 6.6 Verification Before Push
+1. Capture screenshots at `390x844` (mobile emulation), `820x1180`, and `1440x900` for every changed page.
+2. Assert `document.documentElement.scrollWidth === window.innerWidth` at mobile and tablet.
+3. Check: no element with `getBoundingClientRect().right > innerWidth`, no tap target under `44px`, no text under `12px`.
+
+---
+
+## 7. SEO Rules
+
+1. Every page sets its own `title`, `description`, `og:description` (`property=`), `og:image`, and `og:image:alt`. The generator enforces this. Never hand-edit a `<head>` in a generated page.
+2. Project pages use `og-<slug>.jpg` (`1200x630`, JPEG quality `88`, center-cropped from the `2752x1536` showcase). Section pages use `og-home.png`.
+3. Every page includes `theme-color #0a0a0a`, `apple-touch-icon.png` (`180px`), and `/site.webmanifest`.
+4. Google Fonts load non-blocking (`media="print" onload="this.media='all'"` with a `<noscript>` fallback).
+5. The hero image carries `fetchpriority="high"`. Every `<img>` has `width` and `height`.
+6. Showcase assets ship as WebP only (6-step ladder, see 6.5). Do not add JPG fallbacks.
+7. `dateModified` and sitemap `lastmod` come from the generation date (`TODAY` in the generator).
+8. Add every new route to the generator sitemap list, the command palette `searchCatalog`, and `llms.txt`.
+
+---
+
+## 8. Forms and Deployment Protocol
 
 1. **Contact Form**: Post `#contact-inquiry-form` (`Name` `entry.2053400866`, `Email` `entry.1429894223`, `Topic` `entry.39421880`, `Message` `entry.350208973`) to the configured Google Form `formResponse` endpoint using `fetch(..., { mode: 'no-cors' })`.
-2. **Pre-Deploy Visual Check**: Before pushing UI changes, capture headless Chrome screenshots (`1440px` width) of modified pages and inspect them for text wrapping, alignment, and cognitive load.
+2. **Pre-Deploy Visual Check**: Before pushing UI changes, capture headless Chrome screenshots at `390px`, `820px`, and `1440px` of modified pages and inspect them for text wrapping, alignment, and cognitive load.
 3. **Git Author**: Commit to `kapildoesmarketing/kapildoesmarketing.github.io` as `Kapil Pidhwani <kapildoesmarketing@gmail.com>`. Never commit with an internal corporate email.
 4. **Live Sync**: Copy production files from `/usr/local/google/home/hikapil/Projects/kapilpidhwani-v2` to `/usr/local/google/home/hikapil/Projects/kapildoesmarketing.github.io` (excluding `scratch/`, `action_items.md`, and `suggestions.md`), push to `origin/main`, and verify HTTP `200` on `https://kapilpidhwani.in/`.

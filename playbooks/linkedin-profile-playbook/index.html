@@ -16,13 +16,16 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://kapilpidhwani.in/playbooks/linkedin-profile-playbook/">
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="alternate" type="text/markdown" href="https://kapilpidhwani.in/llms.txt" title="LLM Context &amp; Operator Directory">
 
   <!-- Open Graph / Social Preview -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Kapil Pidhwani">
   <meta property="og:title" content="How to Fix Your LinkedIn Profile in 15 Steps - Interactive Playbook">
-  <meta property="og:description" content="12 interactive slides, a 15-point audit scorecard, 6-part banner framework, 15-word headline formula, and 5 copy-paste AI prompts by Kapil Pidhwani.">
+  <meta property="og:description" content="Interactive 12-slide HTML playbook by Kapil Pidhwani: 15-point LinkedIn profile audit checklist, banner &amp; Featured blueprints, and 5 copy-paste AI prompts.">
   <meta property="og:url" content="https://kapilpidhwani.in/playbooks/linkedin-profile-playbook/">
   <meta property="og:image" content="https://kapilpidhwani.in/assets/images/og-linkedin-playbook.png">
   <meta property="og:image:width" content="1200">
@@ -97,7 +100,8 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&display=swap" rel="stylesheet" media="print" onload="this.media=\'all\'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&display=swap" rel="stylesheet"></noscript>
   <style id="sidefolio-playbook-styles">
     /* Deisgned by Kapil Pidhwani: Sidefolio Playbook Deck Engine (ceiling: self-contained CSS per playbook; upgrade path: extract shared tokens into /assets/css/sidefolio.css when 3+ playbooks exist). */
     :root,
@@ -392,6 +396,10 @@
       border: 1px solid transparent;
       transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
       position: relative;
+    }
+
+    .sf-nav-link.sf-nav-mobile-only {
+      display: none;
     }
 
     .sf-nav-link:hover {
@@ -1168,10 +1176,10 @@
       }
     }
 
-    @media (max-width: 809px) {
+    @media (max-width: 1023px) {
       .sf-page-wrapper {
-        padding: 8px 8px 80px 8px;
-        overflow-x: hidden;
+        padding: 8px 8px calc(84px + env(safe-area-inset-bottom, 0px)) 8px;
+        overflow-x: clip;
       }
       .sf-sidebar {
         position: fixed;
@@ -1181,8 +1189,8 @@
         right: 0;
         width: auto;
         height: auto;
-        padding: 14px 10px 10px 10px;
-        background: linear-gradient(to top, var(--token-5b5b05c3) 72%, transparent);
+        padding: 14px 10px calc(8px + env(safe-area-inset-bottom, 0px)) 10px;
+        background: linear-gradient(to top, var(--token-5b5b05c3) 70%, transparent);
         z-index: 60;
       }
       .sf-profile-tray,
@@ -1208,31 +1216,40 @@
       }
       [data-framer-name="Main"] .sf-nav-panel {
         flex-direction: row;
-        gap: 4px;
+        gap: 2px;
         padding: 4px;
-        border-radius: 14px;
-        background-color: rgba(20, 20, 20, 0.92);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        max-width: 520px;
+        margin: 0 auto;
+        border-radius: 18px;
+        background-color: rgba(20, 20, 20, 0.94);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
         border: 1px solid var(--token-789768dc);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
       }
       [data-framer-name="Main"] .sf-nav-link {
         flex: 1 1 0;
-        height: 42px;
+        min-width: 0;
+        height: 50px;
+        flex-direction: column;
         justify-content: center;
-        padding: 0 4px;
+        padding: 0 2px;
         gap: 4px;
-        border-radius: 10px;
+        border-radius: 13px;
+      }
+      [data-framer-name="Main"] .sf-nav-link.sf-nav-mobile-only {
+        display: flex;
       }
       [data-framer-name="Main"] .sf-nav-icon,
       [data-framer-name="Main"] .sf-nav-icon svg {
-        width: 14px;
-        height: 14px;
+        width: 18px;
+        height: 18px;
       }
       [data-framer-name="Main"] .sf-nav-label {
-        flex: 0 1 auto;
-        font-size: 12px;
+        flex: none;
+        font-size: 10.5px;
+        line-height: 1;
+        letter-spacing: 0.01em;
       }
       .sf-window {
         padding: 8px;
@@ -1241,6 +1258,64 @@
       }
       .sf-deck-hint {
         display: none;
+      }
+      /* Compact sticky deck controls on touch widths */
+      .sf-deck-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background-color: rgba(20, 20, 20, 0.94);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 14px;
+        padding: 6px 8px;
+        gap: 6px;
+      }
+      .sf-deck-top-left .sf-deck-badge {
+        display: none;
+      }
+      .sf-back-btn,
+      .sf-deck-icon-btn {
+        min-height: 44px;
+      }
+      #fullscreen-label {
+        display: none;
+      }
+      /* Progress dots keep their 6px look but get a 44px tap zone */
+      .sf-deck-progress {
+        gap: 2px;
+      }
+      .sf-progress-step {
+        position: relative;
+        min-width: 0;
+      }
+      .sf-progress-step::before {
+        content: "";
+        position: absolute;
+        inset: -19px 0;
+      }
+      .sf-footer-icon-btn {
+        width: 44px;
+        height: 44px;
+      }
+      .sf-btn-primary,
+      .sf-btn-secondary,
+      .sf-footer-sub-btn {
+        min-height: 44px;
+      }
+      .sf-footer-input {
+        font-size: 16px;
+        min-height: 44px;
+      }
+      .sf-footer-legal a,
+      .sf-footer a.sf-text-12 {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+      }
+      .sf-card-num,
+      .sf-kbd {
+        font-size: 12px;
       }
     }
 
@@ -1390,7 +1465,7 @@
       display: block;
     }
 
-    @media (max-width: 809px) {
+    @media (max-width: 1023px) {
       .sf-footer-grid {
         grid-template-columns: 1fr;
       }
@@ -1398,6 +1473,21 @@
       .sf-footer-news-panel {
         padding: 24px 20px;
         min-height: auto;
+      }
+    }
+
+    /* Responsive overrides kept last so they win on equal specificity */
+    @media (max-width: 1023px) {
+      .sf-footer-icon-btn {
+        width: 44px;
+        height: 44px;
+      }
+      .sf-footer-input {
+        font-size: 16px;
+        min-height: 44px;
+      }
+      #btn-fullscreen {
+        min-width: 44px;
       }
     }
   </style>
@@ -1473,6 +1563,17 @@
                   <span class="sf-text-15 sf-nav-label">Work</span>
                 </a>
 
+                <!-- Playbooks (Active) -->
+                <a href="/playbooks/" class="sf-nav-link is-active" aria-current="page">
+                  <span class="sf-nav-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M 9 0 L 2 0 C 0.895 0 0 0.895 0 2 L 0 16 C 0 17.105 0.895 18 2 18 L 16 18 C 17.105 18 18 17.105 18 16 L 18 9" transform="translate(2 4)"/>
+                      <path d="M 10.5 0.621 C 11.328 -0.207 12.672 -0.207 13.5 0.621 C 14.328 1.45 14.328 2.793 13.5 3.621 L 4 13.121 L 0 14.121 L 1 10.121 Z" transform="translate(8 1.879)"/>
+                    </svg>
+                  </span>
+                  <span class="sf-text-15 sf-nav-label">Playbooks</span>
+                </a>
+
                 <!-- Links -->
                 <a href="/links/" class="sf-nav-link">
                   <span class="sf-nav-icon" aria-hidden="true">
@@ -1484,15 +1585,14 @@
                   <span class="sf-text-15 sf-nav-label">Links</span>
                 </a>
 
-                <!-- Playbooks (Active) -->
-                <a href="/playbooks/" class="sf-nav-link is-active" aria-current="page">
+                <a href="/contact/" class="sf-nav-link sf-nav-mobile-only">
                   <span class="sf-nav-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M 9 0 L 2 0 C 0.895 0 0 0.895 0 2 L 0 16 C 0 17.105 0.895 18 2 18 L 16 18 C 17.105 18 18 17.105 18 16 L 18 9" transform="translate(2 4)"/>
-                      <path d="M 10.5 0.621 C 11.328 -0.207 12.672 -0.207 13.5 0.621 C 14.328 1.45 14.328 2.793 13.5 3.621 L 4 13.121 L 0 14.121 L 1 10.121 Z" transform="translate(8 1.879)"/>
+                      <path d="M 2 0 L 18 0 C 19.1 0 20 0.9 20 2 L 20 14 C 20 15.1 19.1 16 18 16 L 2 16 C 0.9 16 0 15.1 0 14 L 0 2 C 0 0.9 0.9 0 2 0 Z" transform="translate(2 4)"/>
+                      <path d="M 20 0 L 10 7 L 0 0" transform="translate(2 6)"/>
                     </svg>
                   </span>
-                  <span class="sf-text-15 sf-nav-label">Playbooks</span>
+                  <span class="sf-text-15 sf-nav-label">Contact</span>
                 </a>
               </div>
             </nav>
@@ -2731,6 +2831,27 @@ No pressure at all, and if it helps save time, I'm happy to share a quick bullet
           syncFullscreenUI();
         }
       });
+
+      // Touch swipe: left = next, right = previous (Deisgned by Kapil Pidhwani: 48px threshold, no library)
+      let swipeStartX = 0;
+      let swipeStartY = 0;
+      const stageEl = document.querySelector('.sf-slide-stage') || document.body;
+      stageEl.addEventListener('touchstart', function (e) {
+        if (!e.touches || e.touches.length !== 1) return;
+        swipeStartX = e.touches[0].clientX;
+        swipeStartY = e.touches[0].clientY;
+      }, { passive: true });
+      stageEl.addEventListener('touchend', function (e) {
+        const t = e.changedTouches && e.changedTouches[0];
+        if (!t) return;
+        const dx = t.clientX - swipeStartX;
+        const dy = t.clientY - swipeStartY;
+        if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea' || tag === 'button' || tag === 'a') return;
+        if (dx < 0 && currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+        if (dx > 0 && currentSlide > 0) goToSlide(currentSlide - 1);
+      }, { passive: true });
 
       // 4. Interactive 15-Point Audit Checklist (Persisted in localStorage)
       let checkedItems = {};

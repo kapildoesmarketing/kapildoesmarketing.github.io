@@ -166,6 +166,45 @@
     });
   });
 
+  // Project pages: full-screen Sankey modal on touch widths
+  const sankeyModal = document.getElementById('sankey-modal');
+  document.querySelectorAll('[data-open-sankey]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (sankeyModal) sankeyModal.hidden = false;
+    });
+  });
+  document.querySelectorAll('[data-close-sankey]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (sankeyModal) sankeyModal.hidden = true;
+    });
+  });
+
+  // Full-resolution image lightbox (loads the 2752w master only on open)
+  const lightbox = document.getElementById('image-lightbox');
+  const lightboxImg = lightbox ? lightbox.querySelector('.sf-lightbox-img') : null;
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    if (lightboxImg) lightboxImg.removeAttribute('src');
+    document.documentElement.classList.remove('sf-lightbox-open');
+  }
+  document.querySelectorAll('[data-open-lightbox]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!lightbox || !lightboxImg) return;
+      const src = btn.getAttribute('data-open-lightbox');
+      const img = btn.parentElement ? btn.parentElement.querySelector('img') : null;
+      lightboxImg.alt = img ? (img.getAttribute('alt') || '') : '';
+      lightboxImg.src = src;
+      lightbox.hidden = false;
+      document.documentElement.classList.add('sf-lightbox-open');
+    });
+  });
+  document.querySelectorAll('[data-close-lightbox]').forEach(function (btn) {
+    btn.addEventListener('click', closeLightbox);
+  });
+
   // Floating Back to Top button (appears on scroll in bottom-right corner)
   function updateBackToTopVisibility() {
     const show = (window.scrollY || window.pageYOffset || 0) > 220;
@@ -519,6 +558,7 @@
     { title: 'Playbook 01: Fix Your LinkedIn Profile in 15 Steps', sub: '12 interactive slides, 15-point checklist & 5 AI prompts', badge: 'Playbook', url: '/playbooks/linkedin-profile-playbook/' },
     { title: 'Fundingly.in (Project Page)', sub: 'Indian startup funding intelligence tracker & video engine', badge: 'Web App', url: '/work/fundingly/' },
     { title: 'Toolity.in (Project Page)', sub: 'Suite of zero-bloat web utilities for marketers & operators', badge: 'Web App', url: '/work/toolity/' },
+    { title: 'Think Travel 2026 (Project Page)', sub: 'Google India flagship summit for travel & hospitality leaders', badge: 'Event', url: '/work/think-travel-2026/' },
     { title: 'Privacy Policy', sub: 'Data privacy & analytics policy for kapilpidhwani.in', badge: 'Legal', url: '/privacy-policy/' },
     { title: 'Terms of Service', sub: 'Website usage terms & intellectual property notice', badge: 'Legal', url: '/terms-of-service/' },
     { title: 'Cookie Policy', sub: 'Local storage & minimal cookie usage details', badge: 'Legal', url: '/cookie-policy/' },
@@ -647,6 +687,8 @@
     } else if (e.key === 'Escape') {
       if (searchModal && !searchModal.hidden) closeSearch();
       if (qrModal && !qrModal.hidden) closeQr();
+      if (sankeyModal && !sankeyModal.hidden) sankeyModal.hidden = true;
+      if (lightbox && !lightbox.hidden) closeLightbox();
     }
   });
 
@@ -671,6 +713,14 @@
       skills: [
         'Product Management', 'SEO', 'Workflow Automation', 'UI/UX Design', 'Web Development',
         'Product Marketing', 'Prompt Engineering', 'User Research', 'Growth Strategy', 'Conversion Optimization'
+      ]
+    },
+    {
+      id: 'think-travel-2026',
+      label: 'Think Travel 2026',
+      skills: [
+        'Content Strategy', 'UI/UX Design', 'Product Marketing', 'Market Research', 'Workflow Automation',
+        'Growth Strategy', 'Event Marketing', 'Executive Communications', 'Brand Identity', 'Stakeholder Management'
       ]
     }
   ];
@@ -806,7 +856,7 @@
         }
       });
 
-      // Shared skills anchor along the central bridge between connected ventures
+      // Shared skills anchor along the centroid bridge between connected ventures
       const sCount = sharedSkills.length;
       sharedSkills.forEach(function (sNode, idx) {
         let sumX = 0;
@@ -819,11 +869,12 @@
           }
         });
         const baseX = sumX / (sNode.ventureIndices.length || 1);
-        const spanY = height * (isCompact ? 0.68 : 0.72);
+        const baseY = sumY / (sNode.ventureIndices.length || 1);
+        const spanY = height * (isCompact ? 0.44 : 0.48);
         const t = sCount > 1 ? (idx / (sCount - 1)) - 0.5 : 0;
-        const staggerX = (idx % 2 === 0 ? -1 : 1) * (isCompact ? 14 : 22);
+        const staggerX = (idx % 2 === 0 ? -1 : 1) * (isCompact ? 18 : 28);
         sNode.anchorX = baseX + staggerX;
-        sNode.anchorY = cy + t * spanY;
+        sNode.anchorY = (numVentures === 2 ? cy : baseY * 0.65 + cy * 0.35) + t * spanY;
         sNode.radius = isCompact ? 5 : 6;
         if (!preservePositions) {
           sNode.x = sNode.anchorX;
@@ -831,22 +882,20 @@
         }
       });
 
-      // Venture-specific skills fan out on the outer side of their parent venture
+      // Venture-specific skills fan out radially on the outer side of their parent venture
       Object.keys(uniqueByVenture).forEach(function (vIdxKey) {
         const vIdx = parseInt(vIdxKey, 10);
         const list = uniqueByVenture[vIdx] || [];
         const vn = ventureNodes[vIdx];
         if (!vn) return;
-        const isLeft = vn.anchorX <= cx;
+        const outAngle = Math.atan2(vn.anchorY - cy, vn.anchorX - cx);
         const count = list.length;
-        const arcRadiusX = isCompact ? width * 0.17 : width * 0.185;
-        const arcRadiusY = isCompact ? height * 0.36 : height * 0.38;
+        const arcRadiusX = isCompact ? width * 0.16 : width * 0.175;
+        const arcRadiusY = isCompact ? height * 0.28 : height * 0.31;
         list.forEach(function (uNode, idx) {
           const t = count > 1 ? (idx / (count - 1)) - 0.5 : 0;
-          // Angle fan from -68 deg to +68 deg on the outer side of the hub
-          const fanAngle = t * (Math.PI * 0.74);
-          const dirX = isLeft ? -1 : 1;
-          uNode.anchorX = vn.anchorX + dirX * Math.cos(fanAngle) * arcRadiusX;
+          const fanAngle = outAngle + t * (Math.PI * 0.62);
+          uNode.anchorX = vn.anchorX + Math.cos(fanAngle) * arcRadiusX;
           uNode.anchorY = vn.anchorY + Math.sin(fanAngle) * arcRadiusY;
           uNode.radius = isCompact ? 4 : 4.75;
           if (!preservePositions) {
@@ -1311,7 +1360,7 @@
 
   // Runnable self-check for modular Sidefolio architecture, global shell, SEO & current page view
   window.__verifySidefolioSidebar = function () {
-    const mainLinks = Array.from(document.querySelectorAll('[data-framer-name="Main"] .sf-nav-label')).map(function (el) { return el.textContent.trim(); });
+    const mainLinks = Array.from(document.querySelectorAll('[data-framer-name="Main"] .sf-nav-link:not(.sf-nav-mobile-only) .sf-nav-label')).map(function (el) { return el.textContent.trim(); });
     const connectLinks = Array.from(document.querySelectorAll('[data-framer-name="Connect"] .sf-nav-label')).map(function (el) { return el.textContent.trim(); });
     const views = document.querySelectorAll('[data-page-view]');
     const hiddenViews = document.querySelectorAll('[data-page-view][hidden]');
@@ -1354,7 +1403,7 @@
       console.assert(homeServicesCount === 3, 'Homepage How I Can Help must have 3 bento cards', homeServicesCount);
       console.assert(homePlaybookSlides === 1, 'Homepage Playbooks section must have 1 real playbook row', homePlaybookSlides);
       console.assert(homeTestimonialsCount === 4, 'Homepage Testimonials must have 4 primary cards in marquee', homeTestimonialsCount);
-      console.assert(Boolean(graphCanvas) && Boolean(graphCta) && Array.isArray(window.WORK_GRAPH_PROJECTS) && window.WORK_GRAPH_PROJECTS.length === 2, 'Homepage Area of Work knowledge graph and View all work CTA must exist');
+      console.assert(Boolean(graphCanvas) && Boolean(graphCta) && Array.isArray(window.WORK_GRAPH_PROJECTS) && window.WORK_GRAPH_PROJECTS.length === 3, 'Homepage Area of Work knowledge graph and View all work CTA must exist');
       console.assert(!document.querySelector('#view-home .sf-section-eyebrow, #view-home .sf-service-tags, #view-home .sf-work-badge-copper'), 'Zero AI-slop eyebrow or tag chips on homepage');
     } else if (activeView === 'links') {
       const bentoCells = document.querySelectorAll('#links-hub .sf-links-bento-card').length;
@@ -1372,7 +1421,7 @@
       console.assert(aboutTools === 6, 'About tools grid must have 6 cards', aboutTools);
     } else if (activeView === 'work') {
       const workItems = document.querySelectorAll('#work-hub a.sf-work-card[href^="/work/"]').length;
-      console.assert(workItems === 2, 'Both live Work cards must be clickable links to /work/<slug>/', workItems);
+      console.assert(workItems === 3, 'All live Work cards must be clickable links to /work/<slug>/', workItems);
     } else if (activeView === 'contact') {
       const contactFormEl = document.getElementById('contact-inquiry-form');
       const contactFaqCount = document.querySelectorAll('#contact-faq-list .sf-faq-item').length;
