@@ -169,8 +169,21 @@
   // Project pages: full-screen Sankey modal on touch widths
   const sankeyModal = document.getElementById('sankey-modal');
   document.querySelectorAll('[data-open-sankey]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
+    if (btn.classList.contains('sf-sankey-bare-canvas') && window.innerWidth > 1023) {
+      btn.removeAttribute('role');
+      btn.removeAttribute('tabindex');
+      btn.removeAttribute('aria-label');
+    }
+    function openSankey() {
+      if (btn.classList.contains('sf-sankey-bare-canvas') && window.innerWidth > 1023) return;
       if (sankeyModal) sankeyModal.hidden = false;
+    }
+    btn.addEventListener('click', openSankey);
+    btn.addEventListener('keydown', function (e) {
+      if (btn.tagName !== 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        openSankey();
+      }
     });
   });
   document.querySelectorAll('[data-close-sankey]').forEach(function (btn) {

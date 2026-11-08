@@ -76,41 +76,37 @@
 
 ## 4. Locked Project Detail Page Structure (`/work/<slug>/`)
 
-Use this exact 6-part vertical flow for every project page:
+Goal: a visitor (or Kapil before an interview) understands the whole project with the least reading. The page encodes STAR without labelling it: Overview = Situation and Task, What I did = Action, Outcomes = Result.
 
-1. **Row 1 — `50/50` Project Header Card (`.sf-project-hero-row`, `308px` height)**:
-   - Left `50%`: Two-tone title (`.sf-hero-title-primary` + `.sf-hero-title-muted`), primary CTA (`Visit <Project> ↗`), and secondary button (`← Back to work`). Do not add bio paragraphs inside this header.
-   - Right `50%`: `16:9` studio mockup image.
-2. **Row 2 — `Workflow Notes` (Bare Monochrome Sankey Diagram)**:
-   - Place `<h2 class="sf-sankey-heading">Workflow Notes</h2>` and the 5-column SVG Sankey diagram directly on the black canvas (no card wrapper).
-3. **Row 3 — 3-Column Executive Bento Row (`.sf-services-grid`)**:
-   - Three equal-height `.sf-service-tray` cards in one row:
-     - Card 1 (`The Problem`): Market gap or operational context + quantified barrier in `.sf-service-strip`.
-     - Card 2 (`The System`): Architecture or execution system built + scale metric in `.sf-service-strip`.
-     - Card 3 (`The Result`): Quantified outcome + impact metric in `.sf-service-strip`.
-4. **Row 4 — Baseline-Aligned `2/3 + 1/3` Split (`.sf-project-case-grid`)**:
-   - Left `2/3` (`Key decisions & trade-offs` — `.sf-decisions-tray`): Three horizontal `.sf-decision-exp-row` items (`Domain Tag` | `Chose X over Y` + 1-line rationale | `Outcome Pill`).
-   - Right `1/3` (`Collaborators` — `.sf-collaborators-tray`): Stretches to match the exact height of the left tray. Contains `.sf-collab-card` items (monogram avatar, name, role, external `↗` link, and 1-line contribution summary). Do not add a separate `Specifications` box.
-5. **Row 5 — `Capabilities` (Interactive Knowledge Graph)**:
-   - Render `<canvas id="sf-work-graph-canvas" data-default-project="<slug>">` inside `.sf-graph-panel` so the current project node and its 10 connected skills load pre-highlighted.
-   - Include the top-right reset icon button (`.sf-graph-reset-btn` with `data-graph-reset`).
-6. **Row 6 — Two-Button Project Pager (`.sf-project-pager`)**:
-   - Place two `.sf-btn-secondary` buttons at the bottom: `← Previous project` on the left and `Next project →` on the right.
+Use this exact 7-part vertical flow for every project page. Sections 2 to 5 use the Home-style head (`.sf-section-head`: 32px title, 15px subtitle).
+
+1. **Header Card (`.sf-project-hero-row`)**: two-tone title, `Visit <Project> ↗` (only if a live URL exists), `← Back to work`, showcase image with `.sf-zoom-btn`. No bio text.
+2. **Overview** (`.sf-overview-grid`, 2/3 + 1/3): left `.sf-overview-panel` with **two paragraphs** (paragraph 1: the situation in plain words; paragraph 2: what the project is and Kapil's role). Right `.sf-glance-tray` details table with five rows: `Role`, `When`, `Team`, `Scale`, `Outcome`.
+3. **How it worked**: section head with page-specific subtitle, the 5-column monochrome Sankey, and a one-sentence `.sf-sankey-caption`. Touch widths show an expand button and a tappable thumbnail with `Tap to expand`.
+4. **What I did** (`.sf-services-grid`): three `.sf-service-tray` cards with icon, verb-first title, and one sentence. **No bottom strip.**
+5. **Outcomes** (`.sf-project-case-grid`): left `Results | Why it mattered` tray with three rows (`Plain tag` | `Outcome title` + one sentence | `Number pill`). Right `Collaborators` tray with `.sf-collab-card` items. Only name people who approved it; use team names otherwise.
+6. **Capabilities**: knowledge graph pre-highlighted for the project.
+7. **Pager**: `Previous project` / `Next project` on desktop; project names on mobile.
+
+Copy rules: write for a founder or recruiter who did not see the project. No stack names in titles. Numbers appear once each. Sankey node text uses words for events and counts for data products.
 
 ### 4.1 Adapting Content by Project Category
-Keep the 6-part visual layout identical when adding new categories, and adapt the copy as follows:
+Keep the 7-part layout identical when adding new categories, and adapt the copy as follows:
 - **Web Apps** (e.g., `Fundingly.in`, `Toolity.in`):
-  - *Sankey*: Data ingestion or client-side utility execution pipeline.
-  - *3 Bento Cards*: Market/privacy gap → Technical architecture → Usage/scale impact.
-  - *Key Decisions*: Engineering and product trade-offs (`Sheets over SQL`, `WASM over Cloud`).
-- **Events & Summits** (e.g., Flagship industry summits):
-  - *Sankey*: Attendee funnel from invitation & RSVP waves to check-in, tracks, and post-event follow-up.
-  - *3 Bento Cards*: Event context & audience mandate (`What the event is`) → Experience & RSVP mailer engine built → Attendance, engagement, and operational hours saved.
-  - *Key Decisions*: Experience, logistics, and automation trade-offs (`Custom HTML RSVP mailer over manual threads`).
+  - *Overview*: the gap people face → what the product does and that Kapil built it.
+  - *Sankey*: data or request flow from source to result.
+  - *What I did*: three verb-first cards (`Replaced a paywall with a spreadsheet`).
+  - *Outcomes*: `Access`, `Trust`, `Cost`, `Speed`, `Privacy` style tags with a number pill.
+- **Events & Summits** (e.g., `Think Travel 2026`):
+  - *Overview*: why the industry moment mattered → what the summit was, the sessions, and Kapil's role.
+  - *Sankey*: invitation waves → who was in the room → sessions → what leaders took home → what it left behind. Words, not counts.
+  - *What I did*: communications, visual identity, narrative.
+  - *Outcomes*: `Reach`, `Clarity`, `Legacy`.
 - **GTM & AI Workflow Systems**:
-  - *Sankey*: Signal capture → AI agent processing → Seller/operator action → Revenue impact.
-  - *3 Bento Cards*: Operational bottleneck → Agentic workflow built → Hours saved / revenue unlocked.
-  - *Key Decisions*: Model, tooling, and adoption trade-offs.
+  - *Overview*: the operational bottleneck → the system and Kapil's role.
+  - *Sankey*: signal capture → processing → operator action → impact.
+  - *What I did*: three cards on design, build, adoption.
+  - *Outcomes*: hours saved, revenue unlocked, adoption.
 
 ---
 

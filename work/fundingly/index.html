@@ -24,6 +24,11 @@
   
   
   
+  
+  
+  
+  
+  
   <link rel="alternate" type="text/markdown" href="https://kapilpidhwani.in/llms.txt" title="LLM Context &amp; Operator Directory">
 
   <!-- Open Graph / Social Preview -->
@@ -407,112 +412,165 @@
               </div>
             </div>
 
-            <!-- 2. WORKFLOW NOTES: ONE SMALL HEADING + BARE MONOCHROME SANKEY DIAGRAM DIRECTLY ON BLACK BACKGROUND -->
-            <div class="sf-sankey-section" data-framer-name="Workflow Notes">
-              <div class="sf-sankey-head">
-                <h2 class="sf-sankey-heading">Workflow Notes</h2>
+            <!-- 2. OVERVIEW: 2/3 NARRATIVE + 1/3 AT A GLANCE -->
+            <div class="sf-home-section sf-project-section" data-framer-name="Overview">
+              <div class="sf-section-head">
+                <div class="sf-section-head-left">
+                  <h2 class="sf-section-title">Overview</h2>
+                  <p class="sf-section-subtitle">What it is, and why I built it</p>
+                </div>
+              </div>
+              <div class="sf-project-case-grid sf-overview-grid">
+                <div class="sf-panel sf-overview-panel">
+                    <p>Indian startup funding data sits behind institutional terminals that cost thousands of dollars a year, or scattered across press releases that repeat and contradict each other. The founders, analysts and students who need it most cannot pay for it.</p>
+                    <p>Fundingly.in is a free, searchable record of Indian startup funding rounds. Every week it collects news, investor updates and public filings, removes duplicates and rumours, and publishes verified rounds with company profiles and trend reports. I built it alone: the research process, the data model, the website and the short-form video engine that turns each week into social posts.</p>
+                </div>
+                <div class="sf-tray sf-glance-tray">
+                  <div class="sf-strip">
+                    <p class="sf-text-12 sf-color-secondary">At a glance</p>
+                  </div>
+                  <div class="sf-panel sf-details-table sf-glance-table">
+                    <div class="sf-detail-kv-row">
+                      <span class="sf-detail-key">Role</span>
+                      <span class="sf-detail-val">Founder, product and build</span>
+                    </div>
+                    <div class="sf-detail-kv-row">
+                      <span class="sf-detail-key">When</span>
+                      <span class="sf-detail-val">2026, updated weekly</span>
+                    </div>
+                    <div class="sf-detail-kv-row">
+                      <span class="sf-detail-key">Team</span>
+                      <span class="sf-detail-val">Solo, with community submissions</span>
+                    </div>
+                    <div class="sf-detail-kv-row">
+                      <span class="sf-detail-key">Scale</span>
+                      <span class="sf-detail-val">2,690+ verified rounds, 1,840+ profiles</span>
+                    </div>
+                    <div class="sf-detail-kv-row">
+                      <span class="sf-detail-key">Outcome</span>
+                      <span class="sf-detail-val">Free public access, zero hosting cost</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. HOW IT WORKED: SECTION HEAD + MONOCHROME SANKEY + CAPTION -->
+            <div class="sf-home-section sf-project-section" data-framer-name="How it worked">
+              <div class="sf-section-head">
+                <div class="sf-section-head-left">
+                  <h2 class="sf-section-title">How it worked</h2>
+                  <p class="sf-section-subtitle">From raw news to a verified record</p>
+                </div>
                 <button type="button" class="sf-sankey-expand-btn" data-open-sankey aria-label="Expand diagram" title="Expand diagram">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/>
                   </svg>
                 </button>
               </div>
-              <div class="sf-sankey-bare-canvas" data-framer-name="System Flow Sankey">
-                <svg viewBox="0 0 1044 206" class="sf-sankey-svg" data-sankey-svg="true" role="img" aria-label="Workflow Sankey diagram for Fundingly.in">
-  <path class="sf-sk-flow" data-from="f_news" data-to="f_roundups" d="M 29.0,20.0 C 130.7,20.0 153.3,20.0 255.0,20.0 L 255.0,79.0 C 153.3,79.0 130.7,79.0 29.0,79.0 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_vc" data-to="f_roundups" d="M 29.0,103.0 C 130.7,103.0 153.3,79.0 255.0,79.0 L 255.0,112.2 C 153.3,112.2 130.7,136.2 29.0,136.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_filings" data-to="f_direct" d="M 29.0,160.2 C 130.7,160.2 153.3,136.2 255.0,136.2 L 255.0,151.3 C 153.3,151.3 130.7,175.3 29.0,175.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_dupes" d="M 266.0,20.0 C 369.1,20.0 392.0,20.0 495.0,20.0 L 495.0,27.6 C 392.0,27.6 369.1,27.6 266.0,27.6 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_rumors" d="M 266.0,27.6 C 369.1,27.6 392.0,54.0 495.0,54.0 L 495.0,56.9 C 392.0,56.9 369.1,30.4 266.0,30.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_sheets" d="M 266.0,30.4 C 369.1,30.4 392.0,88.0 495.0,88.0 L 495.0,169.7 C 392.0,169.7 369.1,112.2 266.0,112.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_direct" data-to="f_sheets" d="M 266.0,136.2 C 369.1,136.2 392.0,169.7 495.0,169.7 L 495.0,184.8 C 392.0,184.8 369.1,151.3 266.0,151.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_seed" d="M 506.0,88.0 C 618.0,88.0 643.0,20.0 755.0,20.0 L 755.0,56.7 C 643.0,56.7 618.0,124.7 506.0,124.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_growth" d="M 506.0,124.7 C 618.0,124.7 643.0,80.7 755.0,80.7 L 755.0,107.7 C 643.0,107.7 618.0,151.7 506.0,151.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_debt" d="M 506.0,151.7 C 618.0,151.7 643.0,131.7 755.0,131.7 L 755.0,164.8 C 643.0,164.8 618.0,184.8 506.0,184.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_seed" data-to="f_profiles" d="M 766.0,20.0 C 878.0,20.0 903.0,20.0 1015.0,20.0 L 1015.0,48.1 C 903.0,48.1 878.0,48.1 766.0,48.1 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_seed" data-to="f_trends" d="M 766.0,48.1 C 878.0,48.1 903.0,110.2 1015.0,110.2 L 1015.0,118.9 C 903.0,118.9 878.0,56.7 766.0,56.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_growth" data-to="f_profiles" d="M 766.0,80.7 C 878.0,80.7 903.0,48.1 1015.0,48.1 L 1015.0,67.5 C 903.0,67.5 878.0,100.2 766.0,100.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_growth" data-to="f_trends" d="M 766.0,100.2 C 878.0,100.2 903.0,118.9 1015.0,118.9 L 1015.0,126.4 C 903.0,126.4 878.0,107.7 766.0,107.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_debt" data-to="f_profiles" d="M 766.0,131.7 C 878.0,131.7 903.0,67.5 1015.0,67.5 L 1015.0,86.2 C 903.0,86.2 878.0,150.4 766.0,150.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_debt" data-to="f_trends" d="M 766.0,150.4 C 878.0,150.4 903.0,126.4 1015.0,126.4 L 1015.0,140.8 C 903.0,140.8 878.0,164.8 766.0,164.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <g class="sf-sk-node" data-node-id="f_news"><rect class="sf-sk-bar" x="18" y="20.0" width="11" height="59.0" fill="#c8d0da"/><text x="37" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Startup News</text><text x="37" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">1,640</text></g>
-  <g class="sf-sk-node" data-node-id="f_vc"><rect class="sf-sk-bar" x="18" y="103.0" width="11" height="33.1" fill="#c8d0da"/><text x="37" y="114.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">VC Updates</text><text x="37" y="130.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">920</text></g>
-  <g class="sf-sk-node" data-node-id="f_filings"><rect class="sf-sk-bar" x="18" y="160.2" width="11" height="15.1" fill="#c8d0da"/><text x="37" y="171.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Public Filings</text><text x="37" y="187.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">420</text></g>
-  <g class="sf-sk-node" data-node-id="f_roundups"><rect class="sf-sk-bar" x="255" y="20.0" width="11" height="92.2" fill="#c8d0da"/><text x="274" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Weekly Roundups</text><text x="274" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">2,560</text></g>
-  <g class="sf-sk-node" data-node-id="f_direct"><rect class="sf-sk-bar" x="255" y="136.2" width="11" height="15.1" fill="#c8d0da"/><text x="274" y="147.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Direct Checks</text><text x="274" y="163.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">420</text></g>
-  <g class="sf-sk-node" data-node-id="f_dupes"><rect class="sf-sk-bar" x="495" y="20.0" width="11" height="7.6" fill="#c8d0da"/><text x="514" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Duplicates</text><text x="514" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">210</text></g>
-  <g class="sf-sk-node" data-node-id="f_rumors"><rect class="sf-sk-bar" x="495" y="54.0" width="11" height="2.9" fill="#c8d0da"/><text x="514" y="65.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Rumors</text><text x="514" y="81.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">80</text></g>
-  <g class="sf-sk-node" data-node-id="f_sheets"><rect class="sf-sk-bar" x="495" y="88.0" width="11" height="96.8" fill="#c8d0da"/><text x="514" y="99.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Google Sheets DB</text><text x="514" y="115.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">2,690</text></g>
-  <g class="sf-sk-node" data-node-id="f_seed"><rect class="sf-sk-bar" x="755" y="20.0" width="11" height="36.7" fill="#c8d0da"/><text x="774" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Seed &amp; Early</text><text x="774" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">1,020</text></g>
-  <g class="sf-sk-node" data-node-id="f_growth"><rect class="sf-sk-bar" x="755" y="80.7" width="11" height="27.0" fill="#c8d0da"/><text x="774" y="91.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Series A &amp; Growth</text><text x="774" y="107.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">750</text></g>
-  <g class="sf-sk-node" data-node-id="f_debt"><rect class="sf-sk-bar" x="755" y="131.7" width="11" height="33.1" fill="#c8d0da"/><text x="774" y="142.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Undisclosed &amp; Debt</text><text x="774" y="158.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">920</text></g>
-  <g class="sf-sk-node" data-node-id="f_profiles"><rect class="sf-sk-bar" x="1015" y="20.0" width="11" height="66.2" fill="#c8d0da"/><text x="1007" y="31.0" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Company Profiles</text><text x="1007" y="47.0" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">1,840</text></g>
-  <g class="sf-sk-node" data-node-id="f_trends"><rect class="sf-sk-bar" x="1015" y="110.2" width="11" height="30.6" fill="#c8d0da"/><text x="1007" y="121.2" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Trend Reports</text><text x="1007" y="137.2" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">850</text></g>
+              <div class="sf-sankey-section" data-framer-name="Workflow Notes">
+                <div class="sf-sankey-bare-canvas" data-framer-name="System Flow Sankey" data-open-sankey role="button" tabindex="0" aria-label="Expand the How it worked diagram">
+                  <svg viewBox="0 0 1180 206" class="sf-sankey-svg" data-sankey-svg="true" role="img" aria-label="Workflow Sankey diagram for Fundingly.in">
+  <path class="sf-sk-flow" data-from="f_news" data-to="f_roundups" d="M 29.0,20.0 C 141.9,20.0 167.1,20.0 280.0,20.0 L 280.0,79.0 C 167.1,79.0 141.9,79.0 29.0,79.0 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_vc" data-to="f_roundups" d="M 29.0,103.0 C 141.9,103.0 167.1,79.0 280.0,79.0 L 280.0,112.2 C 167.1,112.2 141.9,136.2 29.0,136.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_filings" data-to="f_direct" d="M 29.0,160.2 C 141.9,160.2 167.1,136.2 280.0,136.2 L 280.0,151.3 C 167.1,151.3 141.9,175.3 29.0,175.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_dupes" d="M 291.0,20.0 C 406.6,20.0 432.4,20.0 548.0,20.0 L 548.0,27.6 C 432.4,27.6 406.6,27.6 291.0,27.6 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_rumors" d="M 291.0,27.6 C 406.6,27.6 432.4,54.0 548.0,54.0 L 548.0,56.9 C 432.4,56.9 406.6,30.4 291.0,30.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_sheets" d="M 291.0,30.4 C 406.6,30.4 432.4,88.0 548.0,88.0 L 548.0,169.7 C 432.4,169.7 406.6,112.2 291.0,112.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_direct" data-to="f_sheets" d="M 291.0,136.2 C 406.6,136.2 432.4,169.7 548.0,169.7 L 548.0,184.8 C 432.4,184.8 406.6,151.3 291.0,151.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_seed" d="M 559.0,88.0 C 672.9,88.0 698.1,20.0 812.0,20.0 L 812.0,56.7 C 698.1,56.7 672.9,124.7 559.0,124.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_growth" d="M 559.0,124.7 C 672.9,124.7 698.1,80.7 812.0,80.7 L 812.0,107.7 C 698.1,107.7 672.9,151.7 559.0,151.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_debt" d="M 559.0,151.7 C 672.9,151.7 698.1,131.7 812.0,131.7 L 812.0,164.8 C 698.1,164.8 672.9,184.8 559.0,184.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_seed" data-to="f_profiles" d="M 823.0,20.0 C 970.6,20.0 1003.4,20.0 1151.0,20.0 L 1151.0,48.1 C 1003.4,48.1 970.6,48.1 823.0,48.1 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_seed" data-to="f_trends" d="M 823.0,48.1 C 970.6,48.1 1003.4,110.2 1151.0,110.2 L 1151.0,118.9 C 1003.4,118.9 970.6,56.7 823.0,56.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_growth" data-to="f_profiles" d="M 823.0,80.7 C 970.6,80.7 1003.4,48.1 1151.0,48.1 L 1151.0,67.5 C 1003.4,67.5 970.6,100.2 823.0,100.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_growth" data-to="f_trends" d="M 823.0,100.2 C 970.6,100.2 1003.4,118.9 1151.0,118.9 L 1151.0,126.4 C 1003.4,126.4 970.6,107.7 823.0,107.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_debt" data-to="f_profiles" d="M 823.0,131.7 C 970.6,131.7 1003.4,67.5 1151.0,67.5 L 1151.0,86.2 C 1003.4,86.2 970.6,150.4 823.0,150.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_debt" data-to="f_trends" d="M 823.0,150.4 C 970.6,150.4 1003.4,126.4 1151.0,126.4 L 1151.0,140.8 C 1003.4,140.8 970.6,164.8 823.0,164.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <g class="sf-sk-node" data-node-id="f_news"><rect class="sf-sk-bar" x="18" y="20.0" width="11" height="59.0" fill="#c8d0da"/><text x="37" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Startup News</text><text x="37" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">1,640</text></g>
+  <g class="sf-sk-node" data-node-id="f_vc"><rect class="sf-sk-bar" x="18" y="103.0" width="11" height="33.1" fill="#c8d0da"/><text x="37" y="114.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">VC Updates</text><text x="37" y="130.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">920</text></g>
+  <g class="sf-sk-node" data-node-id="f_filings"><rect class="sf-sk-bar" x="18" y="160.2" width="11" height="15.1" fill="#c8d0da"/><text x="37" y="171.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Public Filings</text><text x="37" y="187.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">420</text></g>
+  <g class="sf-sk-node" data-node-id="f_roundups"><rect class="sf-sk-bar" x="280" y="20.0" width="11" height="92.2" fill="#c8d0da"/><text x="299" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Weekly Roundups</text><text x="299" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">2,560</text></g>
+  <g class="sf-sk-node" data-node-id="f_direct"><rect class="sf-sk-bar" x="280" y="136.2" width="11" height="15.1" fill="#c8d0da"/><text x="299" y="147.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Direct Checks</text><text x="299" y="163.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">420</text></g>
+  <g class="sf-sk-node" data-node-id="f_dupes"><rect class="sf-sk-bar" x="548" y="20.0" width="11" height="7.6" fill="#c8d0da"/><text x="567" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Duplicates</text><text x="567" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">210</text></g>
+  <g class="sf-sk-node" data-node-id="f_rumors"><rect class="sf-sk-bar" x="548" y="54.0" width="11" height="2.9" fill="#c8d0da"/><text x="567" y="65.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Rumors</text><text x="567" y="81.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">80</text></g>
+  <g class="sf-sk-node" data-node-id="f_sheets"><rect class="sf-sk-bar" x="548" y="88.0" width="11" height="96.8" fill="#c8d0da"/><text x="567" y="99.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Google Sheets DB</text><text x="567" y="115.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">2,690</text></g>
+  <g class="sf-sk-node" data-node-id="f_seed"><rect class="sf-sk-bar" x="812" y="20.0" width="11" height="36.7" fill="#c8d0da"/><text x="831" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Seed &amp; Early</text><text x="831" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">1,020</text></g>
+  <g class="sf-sk-node" data-node-id="f_growth"><rect class="sf-sk-bar" x="812" y="80.7" width="11" height="27.0" fill="#c8d0da"/><text x="831" y="91.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Series A &amp; Growth</text><text x="831" y="107.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">750</text></g>
+  <g class="sf-sk-node" data-node-id="f_debt"><rect class="sf-sk-bar" x="812" y="131.7" width="11" height="33.1" fill="#c8d0da"/><text x="831" y="142.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Undisclosed &amp; Debt</text><text x="831" y="158.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">920</text></g>
+  <g class="sf-sk-node" data-node-id="f_profiles"><rect class="sf-sk-bar" x="1151" y="20.0" width="11" height="66.2" fill="#c8d0da"/><text x="1143" y="31.0" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Company Profiles</text><text x="1143" y="47.0" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">1,840</text></g>
+  <g class="sf-sk-node" data-node-id="f_trends"><rect class="sf-sk-bar" x="1151" y="110.2" width="11" height="30.6" fill="#c8d0da"/><text x="1143" y="121.2" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Trend Reports</text><text x="1143" y="137.2" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">850</text></g>
 </svg>
+                  <span class="sf-sankey-tap-hint" aria-hidden="true">Tap to expand</span>
+                </div>
+                <p class="sf-sankey-caption">Three sources feed one sheet. Duplicates and rumours leave. Verified rounds become profiles and trend reports.</p>
               </div>
             </div>
 
             <!-- 2b. FULL-SCREEN SANKEY MODAL (touch widths) -->
             <div class="sf-search-modal sf-sankey-modal" id="sankey-modal" hidden>
               <div class="sf-search-backdrop" data-close-sankey></div>
-              <div class="sf-search-dialog" role="dialog" aria-modal="true" aria-label="Workflow Notes diagram, expanded">
+              <div class="sf-search-dialog" role="dialog" aria-modal="true" aria-label="How it worked diagram, expanded">
                 <div class="sf-sankey-modal-head">
-                  <p class="sf-text-15 sf-color-primary">Workflow Notes</p>
+                  <p class="sf-text-15 sf-color-primary">How it worked</p>
                   <button type="button" class="sf-search-esc" data-close-sankey>ESC</button>
                 </div>
                 <div class="sf-sankey-modal-body">
-                  <svg viewBox="0 0 1044 206" class="sf-sankey-svg" data-sankey-svg="true" role="img" aria-label="Workflow Sankey diagram for Fundingly.in">
-  <path class="sf-sk-flow" data-from="f_news" data-to="f_roundups" d="M 29.0,20.0 C 130.7,20.0 153.3,20.0 255.0,20.0 L 255.0,79.0 C 153.3,79.0 130.7,79.0 29.0,79.0 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_vc" data-to="f_roundups" d="M 29.0,103.0 C 130.7,103.0 153.3,79.0 255.0,79.0 L 255.0,112.2 C 153.3,112.2 130.7,136.2 29.0,136.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_filings" data-to="f_direct" d="M 29.0,160.2 C 130.7,160.2 153.3,136.2 255.0,136.2 L 255.0,151.3 C 153.3,151.3 130.7,175.3 29.0,175.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_dupes" d="M 266.0,20.0 C 369.1,20.0 392.0,20.0 495.0,20.0 L 495.0,27.6 C 392.0,27.6 369.1,27.6 266.0,27.6 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_rumors" d="M 266.0,27.6 C 369.1,27.6 392.0,54.0 495.0,54.0 L 495.0,56.9 C 392.0,56.9 369.1,30.4 266.0,30.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_sheets" d="M 266.0,30.4 C 369.1,30.4 392.0,88.0 495.0,88.0 L 495.0,169.7 C 392.0,169.7 369.1,112.2 266.0,112.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_direct" data-to="f_sheets" d="M 266.0,136.2 C 369.1,136.2 392.0,169.7 495.0,169.7 L 495.0,184.8 C 392.0,184.8 369.1,151.3 266.0,151.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_seed" d="M 506.0,88.0 C 618.0,88.0 643.0,20.0 755.0,20.0 L 755.0,56.7 C 643.0,56.7 618.0,124.7 506.0,124.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_growth" d="M 506.0,124.7 C 618.0,124.7 643.0,80.7 755.0,80.7 L 755.0,107.7 C 643.0,107.7 618.0,151.7 506.0,151.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_debt" d="M 506.0,151.7 C 618.0,151.7 643.0,131.7 755.0,131.7 L 755.0,164.8 C 643.0,164.8 618.0,184.8 506.0,184.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_seed" data-to="f_profiles" d="M 766.0,20.0 C 878.0,20.0 903.0,20.0 1015.0,20.0 L 1015.0,48.1 C 903.0,48.1 878.0,48.1 766.0,48.1 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_seed" data-to="f_trends" d="M 766.0,48.1 C 878.0,48.1 903.0,110.2 1015.0,110.2 L 1015.0,118.9 C 903.0,118.9 878.0,56.7 766.0,56.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_growth" data-to="f_profiles" d="M 766.0,80.7 C 878.0,80.7 903.0,48.1 1015.0,48.1 L 1015.0,67.5 C 903.0,67.5 878.0,100.2 766.0,100.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_growth" data-to="f_trends" d="M 766.0,100.2 C 878.0,100.2 903.0,118.9 1015.0,118.9 L 1015.0,126.4 C 903.0,126.4 878.0,107.7 766.0,107.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_debt" data-to="f_profiles" d="M 766.0,131.7 C 878.0,131.7 903.0,67.5 1015.0,67.5 L 1015.0,86.2 C 903.0,86.2 878.0,150.4 766.0,150.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <path class="sf-sk-flow" data-from="f_debt" data-to="f_trends" d="M 766.0,150.4 C 878.0,150.4 903.0,126.4 1015.0,126.4 L 1015.0,140.8 C 903.0,140.8 878.0,164.8 766.0,164.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
-  <g class="sf-sk-node" data-node-id="f_news"><rect class="sf-sk-bar" x="18" y="20.0" width="11" height="59.0" fill="#c8d0da"/><text x="37" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Startup News</text><text x="37" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">1,640</text></g>
-  <g class="sf-sk-node" data-node-id="f_vc"><rect class="sf-sk-bar" x="18" y="103.0" width="11" height="33.1" fill="#c8d0da"/><text x="37" y="114.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">VC Updates</text><text x="37" y="130.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">920</text></g>
-  <g class="sf-sk-node" data-node-id="f_filings"><rect class="sf-sk-bar" x="18" y="160.2" width="11" height="15.1" fill="#c8d0da"/><text x="37" y="171.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Public Filings</text><text x="37" y="187.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">420</text></g>
-  <g class="sf-sk-node" data-node-id="f_roundups"><rect class="sf-sk-bar" x="255" y="20.0" width="11" height="92.2" fill="#c8d0da"/><text x="274" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Weekly Roundups</text><text x="274" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">2,560</text></g>
-  <g class="sf-sk-node" data-node-id="f_direct"><rect class="sf-sk-bar" x="255" y="136.2" width="11" height="15.1" fill="#c8d0da"/><text x="274" y="147.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Direct Checks</text><text x="274" y="163.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">420</text></g>
-  <g class="sf-sk-node" data-node-id="f_dupes"><rect class="sf-sk-bar" x="495" y="20.0" width="11" height="7.6" fill="#c8d0da"/><text x="514" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Duplicates</text><text x="514" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">210</text></g>
-  <g class="sf-sk-node" data-node-id="f_rumors"><rect class="sf-sk-bar" x="495" y="54.0" width="11" height="2.9" fill="#c8d0da"/><text x="514" y="65.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Rumors</text><text x="514" y="81.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">80</text></g>
-  <g class="sf-sk-node" data-node-id="f_sheets"><rect class="sf-sk-bar" x="495" y="88.0" width="11" height="96.8" fill="#c8d0da"/><text x="514" y="99.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Google Sheets DB</text><text x="514" y="115.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">2,690</text></g>
-  <g class="sf-sk-node" data-node-id="f_seed"><rect class="sf-sk-bar" x="755" y="20.0" width="11" height="36.7" fill="#c8d0da"/><text x="774" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Seed &amp; Early</text><text x="774" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">1,020</text></g>
-  <g class="sf-sk-node" data-node-id="f_growth"><rect class="sf-sk-bar" x="755" y="80.7" width="11" height="27.0" fill="#c8d0da"/><text x="774" y="91.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Series A &amp; Growth</text><text x="774" y="107.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">750</text></g>
-  <g class="sf-sk-node" data-node-id="f_debt"><rect class="sf-sk-bar" x="755" y="131.7" width="11" height="33.1" fill="#c8d0da"/><text x="774" y="142.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Undisclosed &amp; Debt</text><text x="774" y="158.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">920</text></g>
-  <g class="sf-sk-node" data-node-id="f_profiles"><rect class="sf-sk-bar" x="1015" y="20.0" width="11" height="66.2" fill="#c8d0da"/><text x="1007" y="31.0" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Company Profiles</text><text x="1007" y="47.0" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">1,840</text></g>
-  <g class="sf-sk-node" data-node-id="f_trends"><rect class="sf-sk-bar" x="1015" y="110.2" width="11" height="30.6" fill="#c8d0da"/><text x="1007" y="121.2" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500">Trend Reports</text><text x="1007" y="137.2" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12">850</text></g>
+                  <svg viewBox="0 0 1180 206" class="sf-sankey-svg" data-sankey-svg="true" role="img" aria-label="Workflow Sankey diagram for Fundingly.in">
+  <path class="sf-sk-flow" data-from="f_news" data-to="f_roundups" d="M 29.0,20.0 C 141.9,20.0 167.1,20.0 280.0,20.0 L 280.0,79.0 C 167.1,79.0 141.9,79.0 29.0,79.0 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_vc" data-to="f_roundups" d="M 29.0,103.0 C 141.9,103.0 167.1,79.0 280.0,79.0 L 280.0,112.2 C 167.1,112.2 141.9,136.2 29.0,136.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_filings" data-to="f_direct" d="M 29.0,160.2 C 141.9,160.2 167.1,136.2 280.0,136.2 L 280.0,151.3 C 167.1,151.3 141.9,175.3 29.0,175.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_dupes" d="M 291.0,20.0 C 406.6,20.0 432.4,20.0 548.0,20.0 L 548.0,27.6 C 432.4,27.6 406.6,27.6 291.0,27.6 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_rumors" d="M 291.0,27.6 C 406.6,27.6 432.4,54.0 548.0,54.0 L 548.0,56.9 C 432.4,56.9 406.6,30.4 291.0,30.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_roundups" data-to="f_sheets" d="M 291.0,30.4 C 406.6,30.4 432.4,88.0 548.0,88.0 L 548.0,169.7 C 432.4,169.7 406.6,112.2 291.0,112.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_direct" data-to="f_sheets" d="M 291.0,136.2 C 406.6,136.2 432.4,169.7 548.0,169.7 L 548.0,184.8 C 432.4,184.8 406.6,151.3 291.0,151.3 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_seed" d="M 559.0,88.0 C 672.9,88.0 698.1,20.0 812.0,20.0 L 812.0,56.7 C 698.1,56.7 672.9,124.7 559.0,124.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_growth" d="M 559.0,124.7 C 672.9,124.7 698.1,80.7 812.0,80.7 L 812.0,107.7 C 698.1,107.7 672.9,151.7 559.0,151.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_sheets" data-to="f_debt" d="M 559.0,151.7 C 672.9,151.7 698.1,131.7 812.0,131.7 L 812.0,164.8 C 698.1,164.8 672.9,184.8 559.0,184.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_seed" data-to="f_profiles" d="M 823.0,20.0 C 970.6,20.0 1003.4,20.0 1151.0,20.0 L 1151.0,48.1 C 1003.4,48.1 970.6,48.1 823.0,48.1 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_seed" data-to="f_trends" d="M 823.0,48.1 C 970.6,48.1 1003.4,110.2 1151.0,110.2 L 1151.0,118.9 C 1003.4,118.9 970.6,56.7 823.0,56.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_growth" data-to="f_profiles" d="M 823.0,80.7 C 970.6,80.7 1003.4,48.1 1151.0,48.1 L 1151.0,67.5 C 1003.4,67.5 970.6,100.2 823.0,100.2 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_growth" data-to="f_trends" d="M 823.0,100.2 C 970.6,100.2 1003.4,118.9 1151.0,118.9 L 1151.0,126.4 C 1003.4,126.4 970.6,107.7 823.0,107.7 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_debt" data-to="f_profiles" d="M 823.0,131.7 C 970.6,131.7 1003.4,67.5 1151.0,67.5 L 1151.0,86.2 C 1003.4,86.2 970.6,150.4 823.0,150.4 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <path class="sf-sk-flow" data-from="f_debt" data-to="f_trends" d="M 823.0,150.4 C 970.6,150.4 1003.4,126.4 1151.0,126.4 L 1151.0,140.8 C 1003.4,140.8 970.6,164.8 823.0,164.8 Z" fill="#94a3b8" fill-opacity="0.13"/>
+  <g class="sf-sk-node" data-node-id="f_news"><rect class="sf-sk-bar" x="18" y="20.0" width="11" height="59.0" fill="#c8d0da"/><text x="37" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Startup News</text><text x="37" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">1,640</text></g>
+  <g class="sf-sk-node" data-node-id="f_vc"><rect class="sf-sk-bar" x="18" y="103.0" width="11" height="33.1" fill="#c8d0da"/><text x="37" y="114.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">VC Updates</text><text x="37" y="130.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">920</text></g>
+  <g class="sf-sk-node" data-node-id="f_filings"><rect class="sf-sk-bar" x="18" y="160.2" width="11" height="15.1" fill="#c8d0da"/><text x="37" y="171.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Public Filings</text><text x="37" y="187.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">420</text></g>
+  <g class="sf-sk-node" data-node-id="f_roundups"><rect class="sf-sk-bar" x="280" y="20.0" width="11" height="92.2" fill="#c8d0da"/><text x="299" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Weekly Roundups</text><text x="299" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">2,560</text></g>
+  <g class="sf-sk-node" data-node-id="f_direct"><rect class="sf-sk-bar" x="280" y="136.2" width="11" height="15.1" fill="#c8d0da"/><text x="299" y="147.2" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Direct Checks</text><text x="299" y="163.2" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">420</text></g>
+  <g class="sf-sk-node" data-node-id="f_dupes"><rect class="sf-sk-bar" x="548" y="20.0" width="11" height="7.6" fill="#c8d0da"/><text x="567" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Duplicates</text><text x="567" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">210</text></g>
+  <g class="sf-sk-node" data-node-id="f_rumors"><rect class="sf-sk-bar" x="548" y="54.0" width="11" height="2.9" fill="#c8d0da"/><text x="567" y="65.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Rumors</text><text x="567" y="81.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">80</text></g>
+  <g class="sf-sk-node" data-node-id="f_sheets"><rect class="sf-sk-bar" x="548" y="88.0" width="11" height="96.8" fill="#c8d0da"/><text x="567" y="99.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Google Sheets DB</text><text x="567" y="115.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">2,690</text></g>
+  <g class="sf-sk-node" data-node-id="f_seed"><rect class="sf-sk-bar" x="812" y="20.0" width="11" height="36.7" fill="#c8d0da"/><text x="831" y="31.0" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Seed &amp; Early</text><text x="831" y="47.0" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">1,020</text></g>
+  <g class="sf-sk-node" data-node-id="f_growth"><rect class="sf-sk-bar" x="812" y="80.7" width="11" height="27.0" fill="#c8d0da"/><text x="831" y="91.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Series A &amp; Growth</text><text x="831" y="107.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">750</text></g>
+  <g class="sf-sk-node" data-node-id="f_debt"><rect class="sf-sk-bar" x="812" y="131.7" width="11" height="33.1" fill="#c8d0da"/><text x="831" y="142.7" text-anchor="start" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Undisclosed &amp; Debt</text><text x="831" y="158.7" text-anchor="start" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">920</text></g>
+  <g class="sf-sk-node" data-node-id="f_profiles"><rect class="sf-sk-bar" x="1151" y="20.0" width="11" height="66.2" fill="#c8d0da"/><text x="1143" y="31.0" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Company Profiles</text><text x="1143" y="47.0" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">1,840</text></g>
+  <g class="sf-sk-node" data-node-id="f_trends"><rect class="sf-sk-bar" x="1151" y="110.2" width="11" height="30.6" fill="#c8d0da"/><text x="1143" y="121.2" text-anchor="end" fill="#eef2f6" font-family="Inter, -apple-system, sans-serif" font-size="13.5" font-weight="500">Trend Reports</text><text x="1143" y="137.2" text-anchor="end" fill="#7e8b9b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12.5">850</text></g>
 </svg>
                 </div>
                 <p class="sf-sankey-modal-hint">Scroll sideways to follow the flow.</p>
               </div>
             </div>
 
-            <!-- 3. 3-COLUMN EXECUTIVE BENTO BREAKDOWN (Native Sidefolio Service Cards with Icons & Quantified Strips) -->
-            <div class="sf-services-outer-tray" data-framer-name="Executive Summary">
-              <div class="sf-services-grid">
+            <!-- 4. WHAT I DID: SECTION HEAD + 3 CARDS (ICON, TITLE, TEXT) -->
+            <div class="sf-home-section sf-project-section" data-framer-name="What I did">
+              <div class="sf-section-head">
+                <div class="sf-section-head-left">
+                  <h2 class="sf-section-title">What I did</h2>
+                  <p class="sf-section-subtitle">Three things I owned end to end</p>
+                </div>
+              </div>
+              <div class="sf-services-outer-tray" data-framer-name="Executive Summary">
+                <div class="sf-services-grid">
                 <div class="sf-service-tray">
                   <div class="sf-service-panel">
                     <div class="sf-service-icon" aria-hidden="true">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     </div>
                     <div class="sf-service-body">
-                      <h3 class="sf-service-title">The $5,000/yr Data Wall</h3>
-                      <p class="sf-service-desc">Indian startup funding data was locked behind expensive institutional terminals or scattered across unverified press articles.</p>
+                      <h3 class="sf-service-title">Replaced a paywall with a spreadsheet</h3>
+                      <p class="sf-service-desc">Designed a 21-quarter Google Sheets database that one person can update in under three minutes a week, so the data stays free.</p>
                     </div>
-                  </div>
-                  <div class="sf-service-strip">
-                    <span class="sf-service-cta">$5,000/yr paywall replaced</span>
-                    <span class="sf-service-price">The Problem</span>
                   </div>
                 </div>
                 <div class="sf-service-tray">
@@ -521,13 +579,9 @@
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
                     </div>
                     <div class="sf-service-body">
-                      <h3 class="sf-service-title">Zero-Server Sheet Engine</h3>
-                      <p class="sf-service-desc">Engineered a 21-quarter relational Google Sheets database with automated deduplication feeding an instant static web app.</p>
+                      <h3 class="sf-service-title">Made the data trustworthy</h3>
+                      <p class="sf-service-desc">Built a multi-source check that removed 290+ duplicate press releases and rumours before any round went live.</p>
                     </div>
-                  </div>
-                  <div class="sf-service-strip">
-                    <span class="sf-service-cta">21 quarterly tabs · <50ms</span>
-                    <span class="sf-service-price">The System</span>
                   </div>
                 </div>
                 <div class="sf-service-tray">
@@ -536,61 +590,65 @@
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
                     </div>
                     <div class="sf-service-body">
-                      <h3 class="sf-service-title">2,690+ Deals Open-Sourced</h3>
-                      <p class="sf-service-desc">Indexed 1,840+ company profiles and 850+ trend reports with free stage, sector, city and investor filtering.</p>
+                      <h3 class="sf-service-title">Made it fast and free</h3>
+                      <p class="sf-service-desc">Pre-built the search index so filtering by stage, sector, city or investor happens in the browser in under 50 milliseconds.</p>
                     </div>
                   </div>
-                  <div class="sf-service-strip">
-                    <span class="sf-service-cta">100% open access</span>
-                    <span class="sf-service-price">The Result</span>
-                  </div>
+                </div>
                 </div>
               </div>
             </div>
 
-            <!-- 4. BASELINE-ALIGNED 2/3 DECISIONS TRAY + 1/3 FULL-HEIGHT COLLABORATORS TRAY -->
+            <!-- 5. OUTCOMES: SECTION HEAD + 2/3 OUTCOME ROWS + 1/3 COLLABORATORS -->
+            <div class="sf-home-section sf-project-section" data-framer-name="Outcomes">
+              <div class="sf-section-head">
+                <div class="sf-section-head-left">
+                  <h2 class="sf-section-title">Outcomes</h2>
+                  <p class="sf-section-subtitle">What changed because of the work</p>
+                </div>
+              </div>
             <div class="sf-project-case-grid" data-framer-name="Decisions & Collaborators">
               <!-- Left 2/3: Scannable 1-Line Architecture Trade-Offs -->
               <div class="sf-tray sf-decisions-tray" data-framer-name="Key Decisions">
                 <div class="sf-strip">
-                  <p class="sf-text-12 sf-color-secondary">Key decisions &amp; trade-offs</p>
-                  <p class="sf-text-12 sf-color-tertiary">Why we built it this way</p>
+                  <p class="sf-text-12 sf-color-secondary">Results</p>
+                  <p class="sf-text-12 sf-color-tertiary">Why it mattered</p>
                 </div>
                 <div class="sf-exp-list">
                     <article class="sf-panel sf-exp-row sf-decision-exp-row">
-                      <div class="sf-exp-period">Storage</div>
+                      <div class="sf-exp-period">Access</div>
                       <div class="sf-exp-main">
                         <div class="sf-exp-title-line">
-                          <h3 class="sf-exp-role">21-Tab Sheet Schema over Managed SQL</h3>
+                          <h3 class="sf-exp-role">Institutional data, free for everyone</h3>
                         </div>
-                        <p class="sf-exp-org">Weekly deal ingestion and manual QA take under 3 minutes with zero database hosting cost.</p>
+                        <p class="sf-exp-org">2,690+ verified rounds open to founders, analysts and students with no login and no fee.</p>
                       </div>
                       <div class="sf-exp-loc">
-                        <span class="sf-decision-outcome-pill">$0 infra cost</span>
+                        <span class="sf-decision-outcome-pill">$0 to use</span>
                       </div>
                     </article>
                     <article class="sf-panel sf-exp-row sf-decision-exp-row">
-                      <div class="sf-exp-period">Latency</div>
+                      <div class="sf-exp-period">Trust</div>
                       <div class="sf-exp-main">
                         <div class="sf-exp-title-line">
-                          <h3 class="sf-exp-role">Client-Side Index over Server Pagination</h3>
+                          <h3 class="sf-exp-role">Every round checked against two sources</h3>
                         </div>
-                        <p class="sf-exp-org">Pre-compiled JSON payloads filter by stage, sector, city and investor instantly in the browser.</p>
+                        <p class="sf-exp-org">Removed 290+ duplicate press releases and unverified rumours before publishing.</p>
                       </div>
                       <div class="sf-exp-loc">
-                        <span class="sf-decision-outcome-pill"><50ms filter</span>
+                        <span class="sf-decision-outcome-pill">290+ removed</span>
                       </div>
                     </article>
                     <article class="sf-panel sf-exp-row sf-decision-exp-row">
-                      <div class="sf-exp-period">Integrity</div>
+                      <div class="sf-exp-period">Cost</div>
                       <div class="sf-exp-main">
                         <div class="sf-exp-title-line">
-                          <h3 class="sf-exp-role">Multi-Source Audit over Raw Scraping</h3>
+                          <h3 class="sf-exp-role">Runs with no servers</h3>
                         </div>
-                        <p class="sf-exp-org">Filtered out 290+ duplicate press releases and unverified market rumors before indexing.</p>
+                        <p class="sf-exp-org">Google Sheets plus a static site means zero hosting bills and no maintenance window.</p>
                       </div>
                       <div class="sf-exp-loc">
-                        <span class="sf-decision-outcome-pill">2,690+ verified</span>
+                        <span class="sf-decision-outcome-pill">$0 infra</span>
                       </div>
                     </article>
                 </div>
@@ -609,12 +667,12 @@
                           <span class="sf-collab-avatar" aria-hidden="true">KP</span>
                           <div class="sf-collab-channel-copy">
                             <span class="sf-collab-channel-name">Kapil Pidhwani</span>
-                            <span class="sf-collab-channel-role">Product Strategy & Full-Stack Build</span>
+                            <span class="sf-collab-channel-role">Founder, product and build</span>
                           </div>
                         </div>
                         <span class="sf-text-13 sf-color-secondary" aria-hidden="true">&#8599;</span>
                       </div>
-                      <p class="sf-collab-card-desc">Architected the 21-quarter Google Sheets relational schema, deduplication pipeline & static web engine.</p>
+                      <p class="sf-collab-card-desc">Designed the research process, the 21-quarter database, the website and the weekly video engine.</p>
                     </a>
                     <a href="https://fundingly.in" target="_blank" rel="noopener noreferrer" class="sf-panel sf-collab-card">
                       <div class="sf-collab-card-top">
@@ -622,23 +680,24 @@
                           <span class="sf-collab-avatar" aria-hidden="true">FI</span>
                           <div class="sf-collab-channel-copy">
                             <span class="sf-collab-channel-name">Ecosystem Contributors</span>
-                            <span class="sf-collab-channel-role">Deal Submissions & Community QA</span>
+                            <span class="sf-collab-channel-role">Deal submissions and checks</span>
                           </div>
                         </div>
                         <span class="sf-text-13 sf-color-secondary" aria-hidden="true">&#8599;</span>
                       </div>
-                      <p class="sf-collab-card-desc">Founders, analysts & operators submitting and verifying Indian startup funding rounds each week.</p>
+                      <p class="sf-collab-card-desc">Founders, analysts and operators who submit and verify Indian funding rounds each week.</p>
                     </a>
                 </div>
               </div>
             </div>
+            </div>
 
-            <!-- 5. CAPABILITIES (Interactive Knowledge Graph Pre-Highlighted for This Project) -->
+            <!-- 6. CAPABILITIES (Interactive Knowledge Graph Pre-Highlighted for This Project) -->
             <div class="sf-home-section" data-framer-name="Capabilities">
               <div class="sf-section-head">
                 <div class="sf-section-head-left">
                   <h2 class="sf-section-title">Capabilities</h2>
-                  <p class="sf-section-subtitle">Core skills behind Fundingly.in, highlighted across my broader capability network.</p>
+                  <p class="sf-section-subtitle">The skills this project used, shown inside my wider capability map.</p>
                 </div>
                 <a href="/work/" class="sf-section-ghost-link" data-nav-trigger="work">
                   <span>All projects</span>
