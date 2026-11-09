@@ -587,6 +587,7 @@
     { title: 'Fundingly.in (Project Page)', sub: 'Indian startup funding intelligence tracker & video engine', badge: 'Web App', url: '/work/fundingly/' },
     { title: 'Toolity.in (Project Page)', sub: 'Suite of zero-bloat web utilities for marketers & operators', badge: 'Web App', url: '/work/toolity/' },
     { title: 'Google Think Travel (Project Page)', sub: 'Google India flagship summit for travel & hospitality leaders', badge: 'Event', url: '/work/think-travel-2026/' },
+    { title: 'Amazon Rufus Rollout (Project Page)', sub: 'Zero-to-one rollout of Amazon Rufus AI to US childcare sellers', badge: 'Transformation', url: '/work/amazon-rufus-rollout/' },
     { title: 'ACCA Onboarding Redesign (Project Page)', sub: 'Eight-week new-hire programme rebuilt into four; QA 60 to 85+', badge: 'Transformation', url: '/work/onboarding-redesign/' },
     { title: 'Privacy Policy', sub: 'Data privacy & analytics policy for kapilpidhwani.in', badge: 'Legal', url: '/privacy-policy/' },
     { title: 'Terms of Service', sub: 'Website usage terms & intellectual property notice', badge: 'Legal', url: '/terms-of-service/' },
@@ -758,6 +759,14 @@
       skills: [
         'Training Design', 'Team Leadership', 'Operations', 'Process Design', 'Coaching',
         'Stakeholder Management', 'Change Management', 'Customer Experience', 'Workflow Automation', 'Content Strategy'
+      ]
+    },
+    {
+      id: 'amazon-rufus-rollout',
+      label: 'Amazon Rufus Rollout',
+      skills: [
+        'Go-To-Market Strategy', 'Sales Enablement', 'Product Marketing', 'Stakeholder Management', 'Change Management',
+        'Customer Experience', 'Data Analysis', 'Content Strategy', 'Training Design', 'Growth Strategy'
       ]
     }
   ];
@@ -1443,7 +1452,7 @@
       console.assert(homeServicesCount === 3, 'Homepage How I Can Help must have 3 bento cards', homeServicesCount);
       console.assert(homePlaybookSlides === 1, 'Homepage Playbooks section must have 1 real playbook row', homePlaybookSlides);
       console.assert(homeTestimonialsCount === 4, 'Homepage Testimonials must have 4 primary cards in marquee', homeTestimonialsCount);
-      console.assert(Boolean(graphCanvas) && Boolean(graphCta) && Array.isArray(window.WORK_GRAPH_PROJECTS) && window.WORK_GRAPH_PROJECTS.length === 4, 'Homepage Area of Work knowledge graph and View all work CTA must exist');
+      console.assert(Boolean(graphCanvas) && Boolean(graphCta) && Array.isArray(window.WORK_GRAPH_PROJECTS) && window.WORK_GRAPH_PROJECTS.length === 5, 'Homepage Area of Work knowledge graph and View all work CTA must exist');
       console.assert(!document.querySelector('#view-home .sf-section-eyebrow, #view-home .sf-service-tags, #view-home .sf-work-badge-copper'), 'Zero AI-slop eyebrow or tag chips on homepage');
     } else if (activeView === 'links') {
       const bentoCells = document.querySelectorAll('#links-hub .sf-links-bento-card').length;
@@ -1461,7 +1470,7 @@
       console.assert(aboutTools === 6, 'About tools grid must have 6 cards', aboutTools);
     } else if (activeView === 'work') {
       const workItems = document.querySelectorAll('#work-hub a.sf-work-card[href^="/work/"]').length;
-      console.assert(workItems === 4, 'All live Work cards must be clickable links to /work/<slug>/', workItems);
+      console.assert(workItems === 5, 'All live Work cards must be clickable links to /work/<slug>/', workItems);
     } else if (activeView === 'contact') {
       const contactFormEl = document.getElementById('contact-inquiry-form');
       const contactFaqCount = document.querySelectorAll('#contact-faq-list .sf-faq-item').length;
