@@ -592,6 +592,7 @@
     { title: 'Privacy Policy', sub: 'Data privacy & analytics policy for kapilpidhwani.in', badge: 'Legal', url: '/privacy-policy/' },
     { title: 'Terms of Service', sub: 'Website usage terms & intellectual property notice', badge: 'Legal', url: '/terms-of-service/' },
     { title: 'Cookie Policy', sub: 'Local storage & minimal cookie usage details', badge: 'Legal', url: '/cookie-policy/' },
+    { title: 'Ask Google AI About Me', sub: 'See an instant summary of my work, ventures and public footprint on Google AI', badge: 'Google AI', url: 'https://www.google.com/search?q=who+is+%22kapil+pidhwani%22&udm=50&hl=en&arv=1', external: true },
     { title: 'Copy Email (kapildoesmarketing@gmail.com)', sub: 'Copy direct email address to clipboard', badge: 'Action', action: 'copy-email' },
     { title: 'Save Contact', sub: 'Download contact card for your address book', badge: 'Action', action: 'vcard' },
     { title: 'Show Networking QR Code', sub: 'Open scannable QR code modal', badge: 'Action', action: 'qr' }
@@ -1458,7 +1459,7 @@
       const bentoCells = document.querySelectorAll('#links-hub .sf-links-bento-card').length;
       const playbooksCard = document.querySelector('#links-hub [data-nav-trigger="playbooks"]');
       const primaryLinksCta = document.getElementById('links-primary-cta');
-      console.assert(bentoCells === 4, 'Links stack must have 4 rows', bentoCells);
+      console.assert(bentoCells === 5, 'Links stack must have 5 rows', bentoCells);
       console.assert(playbooksCard && playbooksCard.textContent.indexOf('Presentations and Playbooks') !== -1, 'Playbooks row must exist and be named Presentations and Playbooks');
       console.assert(primaryLinksCta && primaryLinksCta.getAttribute('href').indexOf('linkedin.com/in/kapilpidhwani') !== -1, 'Primary Links CTA must point to LinkedIn');
     } else if (activeView === 'about') {
