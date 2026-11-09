@@ -801,7 +801,7 @@
         vy: 0,
         anchorX: 0,
         anchorY: 0,
-        radius: 15
+        radius: 9.5
       };
       nodes.push(vNode);
       nodeById[vNode.id] = vNode;
@@ -815,6 +815,9 @@
             type: 'skill',
             degree: 0,
             isShared: false,
+            isCoreBet: false,
+            rank: 99,
+            outerIdx: 0,
             projects: [],
             ventureIndices: [],
             x: 0,
@@ -823,7 +826,7 @@
             vy: 0,
             anchorX: 0,
             anchorY: 0,
-            radius: 6.5
+            radius: 4.5
           };
           nodes.push(skillMap[sKey]);
           nodeById[sKey] = skillMap[sKey];
@@ -838,21 +841,48 @@
       });
     });
 
-    const sharedSkills = [];
-    const uniqueByVenture = {};
-    nodes.forEach(function (n) {
-      if (n.type === 'skill') {
-        if (n.degree > 1) {
-          n.isShared = true;
-          n.radius = 8.5;
-          sharedSkills.push(n);
-        } else {
-          const vIdx = n.ventureIndices[0] || 0;
-          if (!uniqueByVenture[vIdx]) uniqueByVenture[vIdx] = [];
-          uniqueByVenture[vIdx].push(n);
-        }
+    // Rank skills by project frequency (with strategic tie-break priority for Core Bets)
+    const priorityOrder = [
+      'Content Strategy',
+      'Workflow Automation',
+      'Data Analysis',
+      'Growth Strategy',
+      'Stakeholder Management',
+      'Product Marketing',
+      'UI/UX Design',
+      'Go-To-Market Strategy',
+      'Market Research',
+      'Product Management'
+    ];
+    const skillNodesSorted = Object.keys(skillMap).map(function (k) { return skillMap[k]; }).sort(function (a, b) {
+      if (b.degree !== a.degree) return b.degree - a.degree;
+      const pa = priorityOrder.indexOf(a.label);
+      const pb = priorityOrder.indexOf(b.label);
+      if (pa !== -1 && pb !== -1) return pa - pb;
+      if (pa !== -1) return -1;
+      if (pb !== -1) return 1;
+      return a.label.localeCompare(b.label);
+    });
+
+    const CORE_BET_COUNT = Math.min(8, skillNodesSorted.length);
+    skillNodesSorted.forEach(function (s, idx) {
+      s.rank = idx + 1;
+      s.isShared = s.degree > 1;
+      if (idx < CORE_BET_COUNT) {
+        s.isCoreBet = true;
+        s.radius = 6.5 + Math.max(0, s.degree - 2) * 0.85;
+      } else {
+        s.isCoreBet = false;
+        s.radius = 3.6 + s.degree * 0.55;
       }
     });
+
+    // Update filter pill count dynamically
+    const panelEl = canvas.parentElement;
+    const allFilterBtn = panelEl ? panelEl.querySelector('[data-graph-filter="all"]') : null;
+    if (allFilterBtn) {
+      allFilterBtn.textContent = 'All Skills (' + skillNodesSorted.length + ')';
+    }
 
     // Build adjacency lookup for instant O(1) neighbor highlight checks
     const adjacency = {};
@@ -863,10 +893,12 @@
     });
 
     let width = 800;
-    let height = 460;
+    let height = 540;
     let dpr = 1;
     let initialized = false;
     let simAlpha = 1.0;
+    let pulsePhase = 0;
+    let filterMode = 'all';
     let dragNode = null;
     let hoverNode = null;
     let selectedNode = null;
@@ -880,175 +912,142 @@
     function computeAnchorsAndSeed(preservePositions) {
       const isCompact = width < 640;
       const cx = width * 0.5;
-      const cy = height * 0.48;
-      const numVentures = WORK_GRAPH_PROJECTS.length;
+      const cy = height * 0.52;
       const ventureNodes = nodes.filter(function (n) { return n.type === 'venture'; });
+      const coreNodes = skillNodesSorted.slice(0, CORE_BET_COUNT);
+      const specNodes = skillNodesSorted.slice(CORE_BET_COUNT);
 
-      ventureNodes.forEach(function (vNode, i) {
-        if (numVentures === 2) {
-          const spreadX = isCompact ? width * 0.23 : width * 0.24;
-          vNode.anchorX = cx + (i === 0 ? -spreadX : spreadX);
-          vNode.anchorY = cy;
-        } else {
-          const angle = (i / numVentures) * Math.PI * 2 - Math.PI * 0.5;
-          const rx = width * 0.25;
-          const ry = height * 0.25;
-          vNode.anchorX = cx + Math.cos(angle) * rx;
-          vNode.anchorY = cy + Math.sin(angle) * ry;
+      // 1. Inner Constellation Ring: Top 8 Compounding Core Bets
+      const rxCore = isCompact ? Math.min(width * 0.17, 74) : Math.min(width * 0.155, 148);
+      const ryCore = isCompact ? Math.min(height * 0.16, 72) : Math.min(height * 0.175, 96);
+      coreNodes.forEach(function (s, i) {
+        const angle = (i / coreNodes.length) * Math.PI * 2 - Math.PI * 0.5;
+        s.anchorX = cx + Math.cos(angle) * rxCore;
+        s.anchorY = cy + Math.sin(angle) * ryCore;
+        s.radius = isCompact ? (5.2 + Math.max(0, s.degree - 2) * 0.6) : (6.5 + Math.max(0, s.degree - 2) * 0.85);
+        if (!preservePositions) {
+          s.x = s.anchorX;
+          s.y = s.anchorY;
+          s.vx = 0;
+          s.vy = 0;
         }
-        vNode.radius = isCompact ? 9.5 : 11;
+      });
+
+      // 2. Middle Constellation Ring: Shipped Projects (interleaved by half-step angle)
+      const rxProj = isCompact ? Math.min(width * 0.30, 128) : Math.min(width * 0.285, 286);
+      const ryProj = isCompact ? Math.min(height * 0.30, 136) : Math.min(height * 0.335, 184);
+      ventureNodes.forEach(function (vNode, i) {
+        const angle = ((i + 0.5) / ventureNodes.length) * Math.PI * 2 - Math.PI * 0.5;
+        vNode.anchorX = cx + Math.cos(angle) * rxProj;
+        vNode.anchorY = cy + Math.sin(angle) * ryProj;
+        vNode.radius = isCompact ? 8.0 : 9.5;
         if (!preservePositions) {
           vNode.x = vNode.anchorX;
           vNode.y = vNode.anchorY;
+          vNode.vx = 0;
+          vNode.vy = 0;
         }
       });
 
-      // Shared skills anchor along the centroid bridge between connected ventures
-      const sCount = sharedSkills.length;
-      sharedSkills.forEach(function (sNode, idx) {
-        let sumX = 0;
-        let sumY = 0;
-        sNode.ventureIndices.forEach(function (vIdx) {
+      // 3. Outer Constellation Perimeter: Domain & Specialist Skills sorted by parent project angle
+      const specWithAngle = specNodes.map(function (s) {
+        let sumSin = 0;
+        let sumCos = 0;
+        s.ventureIndices.forEach(function (vIdx) {
           const vn = ventureNodes[vIdx];
           if (vn) {
-            sumX += vn.anchorX;
-            sumY += vn.anchorY;
+            const a = Math.atan2(vn.anchorY - cy, vn.anchorX - cx);
+            sumSin += Math.sin(a);
+            sumCos += Math.cos(a);
           }
         });
-        const baseX = sumX / (sNode.ventureIndices.length || 1);
-        const baseY = sumY / (sNode.ventureIndices.length || 1);
-        const spanY = height * (isCompact ? 0.44 : 0.48);
-        const t = sCount > 1 ? (idx / (sCount - 1)) - 0.5 : 0;
-        const staggerX = (idx % 2 === 0 ? -1 : 1) * (isCompact ? 18 : 28);
-        sNode.anchorX = baseX + staggerX;
-        sNode.anchorY = (numVentures === 2 ? cy : baseY * 0.65 + cy * 0.35) + t * spanY;
-        sNode.radius = isCompact ? 5 : 6;
-        if (!preservePositions) {
-          sNode.x = sNode.anchorX;
-          sNode.y = sNode.anchorY;
-        }
-      });
+        return { node: s, prefAngle: Math.atan2(sumSin, sumCos) };
+      }).sort(function (a, b) { return a.prefAngle - b.prefAngle; });
 
-      // Venture-specific skills fan out radially on the outer side of their parent venture
-      Object.keys(uniqueByVenture).forEach(function (vIdxKey) {
-        const vIdx = parseInt(vIdxKey, 10);
-        const list = uniqueByVenture[vIdx] || [];
-        const vn = ventureNodes[vIdx];
-        if (!vn) return;
-        const outAngle = Math.atan2(vn.anchorY - cy, vn.anchorX - cx);
-        const count = list.length;
-        const arcRadiusX = isCompact ? width * 0.16 : width * 0.175;
-        const arcRadiusY = isCompact ? height * 0.28 : height * 0.31;
-        list.forEach(function (uNode, idx) {
-          const t = count > 1 ? (idx / (count - 1)) - 0.5 : 0;
-          const fanAngle = outAngle + t * (Math.PI * 0.62);
-          uNode.anchorX = vn.anchorX + Math.cos(fanAngle) * arcRadiusX;
-          uNode.anchorY = vn.anchorY + Math.sin(fanAngle) * arcRadiusY;
-          uNode.radius = isCompact ? 4 : 4.75;
-          if (!preservePositions) {
-            uNode.x = uNode.anchorX;
-            uNode.y = uNode.anchorY;
-          }
-        });
+      const rxOuter = isCompact
+        ? Math.min(width * 0.41, width * 0.5 - 32)
+        : Math.max(185, Math.min(width * 0.385, width * 0.5 - 160));
+      const ryOuter = isCompact
+        ? Math.min(height * 0.42, height * 0.5 - 32)
+        : Math.min(height * 0.445, 240);
+
+      specWithAngle.forEach(function (item, i) {
+        const angle = (i / (specWithAngle.length || 1)) * Math.PI * 2 - Math.PI;
+        const stagger = (i % 2 === 0) ? 1.0 : 0.92;
+        item.node.outerIdx = i;
+        item.node.anchorX = cx + Math.cos(angle) * rxOuter * stagger;
+        item.node.anchorY = cy + Math.sin(angle) * ryOuter * stagger;
+        item.node.radius = isCompact ? (3.2 + item.node.degree * 0.4) : (3.6 + item.node.degree * 0.55);
+        if (!preservePositions) {
+          item.node.x = item.node.anchorX;
+          item.node.y = item.node.anchorY;
+          item.node.vx = 0;
+          item.node.vy = 0;
+        }
       });
     }
 
     function stepPhysics() {
       const isCompact = width < 640;
-      const padX = isCompact ? 46 : 68;
-      const padTop = 32;
-      const padBottom = 42;
-      const repulsionStrength = isCompact ? 1650 : 2850;
-      const springK = 0.075;
-      const damping = 0.80;
+      const padX = isCompact ? 26 : 48;
+      const padTop = 52;
+      const padBottom = 30;
+      const damping = 0.78;
 
-      // 1. Node-to-node Coulomb repulsion (elliptical so horizontal text labels don't collide)
+      // 1. Elliptical node repulsion (prevents horizontal label collisions)
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
+        if (filterMode === 'core' && a.type === 'skill' && !a.isCoreBet) continue;
         for (let j = i + 1; j < nodes.length; j++) {
           const b = nodes[j];
+          if (filterMode === 'core' && b.type === 'skill' && !b.isCoreBet) continue;
           const dx = b.x - a.x;
           const dy = b.y - a.y;
-          const effDx = dx * 0.72;
-          const effDy = dy * 1.15;
-          const distSq = effDx * effDx + effDy * effDy + 120;
+          const effDx = dx * 0.68;
+          const effDy = dy * 1.18;
+          const distSq = effDx * effDx + effDy * effDy + 160;
+          if (distSq > 18000) continue;
           const dist = Math.sqrt(distSq);
-          const force = (repulsionStrength * simAlpha) / distSq;
-          const fx = (dx / dist) * force;
-          const fy = (dy / dist) * force;
-          if (a !== dragNode) {
-            a.vx -= fx;
-            a.vy -= fy;
-          }
-          if (b !== dragNode) {
-            b.vx += fx;
-            b.vy += fy;
+          const rep = ((isCompact ? 380 : 720) * simAlpha) / distSq;
+          const fx = (dx / dist) * rep;
+          const fy = (dy / dist) * rep;
+          if (a !== dragNode) { a.vx -= fx; a.vy -= fy; }
+          if (b !== dragNode) { b.vx += fx; b.vy += fy; }
+        }
+      }
+
+      // 2. Elastic edge spring tension when a node is dragged
+      if (dragNode) {
+        for (let i = 0; i < edges.length; i++) {
+          const e = edges[i];
+          const u = nodeById[e.from];
+          const v = nodeById[e.to];
+          if (!u || !v) continue;
+          if (u === dragNode || v === dragNode) {
+            const other = u === dragNode ? v : u;
+            const dx = dragNode.x - other.x;
+            const dy = dragNode.y - other.y;
+            other.vx += dx * 0.022;
+            other.vy += dy * 0.022;
           }
         }
       }
 
-      // 2. Hooke's Law spring attraction along edges
-      for (let i = 0; i < edges.length; i++) {
-        const e = edges[i];
-        const u = nodeById[e.from];
-        const v = nodeById[e.to];
-        if (!u || !v) continue;
-        const dx = v.x - u.x;
-        const dy = v.y - u.y;
-        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        const restLen = v.isShared
-          ? (isCompact ? width * 0.23 : width * 0.24)
-          : (isCompact ? 86 : 128);
-        const displacement = dist - restLen;
-        const force = displacement * springK * simAlpha;
-        const fx = (dx / dist) * force;
-        const fy = (dy / dist) * force;
-
-        // If one endpoint is being dragged, transmit stronger elastic pull to its neighbor
-        const uWeight = (v === dragNode) ? 2.4 : 1.0;
-        const vWeight = (u === dragNode) ? 2.4 : 1.0;
-
-        if (u !== dragNode) {
-          u.vx += fx * uWeight;
-          u.vy += fy * uWeight;
-        }
-        if (v !== dragNode) {
-          v.vx -= fx * vWeight;
-          v.vy -= fy * vWeight;
-        }
-      }
-
-      // 3. Gentle topological anchor gravity (keeps graph untangled & centered)
-      const anchorK = dragNode ? 0.005 : 0.022;
+      // 3. Concentric Anchor Gravity (keeps the 3-ring structure crisp while allowing elastic play)
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         if (n === dragNode) continue;
-        const k = n.type === 'venture' ? anchorK * 1.25 : anchorK;
-        n.vx += (n.anchorX - n.x) * k * simAlpha;
-        n.vy += (n.anchorY - n.y) * k * simAlpha;
-
+        const kAnchor = 0.085;
+        n.vx += (n.anchorX - n.x) * kAnchor;
+        n.vy += (n.anchorY - n.y) * kAnchor;
         n.vx *= damping;
         n.vy *= damping;
-
-        // Cap velocity
-        const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
-        if (speed > 18) {
-          n.vx = (n.vx / speed) * 18;
-          n.vy = (n.vy / speed) * 18;
-        }
-
-        n.x += n.vx;
-        n.y += n.vy;
-
-        // Soft viewport bounds
-        if (n.x < padX) { n.x = padX; n.vx *= -0.4; }
-        if (n.x > width - padX) { n.x = width - padX; n.vx *= -0.4; }
-        if (n.y < padTop) { n.y = padTop; n.vy *= -0.4; }
-        if (n.y > height - padBottom) { n.y = height - padBottom; n.vy *= -0.4; }
+        n.x = Math.max(padX, Math.min(width - padX, n.x + n.vx));
+        n.y = Math.max(padTop, Math.min(height - padBottom, n.y + n.vy));
       }
 
-      if (!dragNode && simAlpha > 0.04) {
-        simAlpha *= 0.985;
+      if (!dragNode && simAlpha > 0.05) {
+        simAlpha *= 0.96;
       }
     }
 
@@ -1057,148 +1056,231 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
+      const isCompact = width < 640;
+      const cx = width * 0.5;
+      const cy = height * 0.52;
       const focusNode = dragNode || hoverNode || selectedNode;
       const activeSet = focusNode ? adjacency[focusNode.id] : null;
-      const isCompact = width < 640;
+      pulsePhase = (pulsePhase + 0.011) % 1;
 
-      // 1. Draw Monochrome Hairline Edges
+      // Subtle atmospheric spotlight behind the Core Bets center
+      const centerGlow = ctx.createRadialGradient(cx, cy, 8, cx, cy, Math.min(width, height) * 0.36);
+      centerGlow.addColorStop(0, 'rgba(255, 255, 255, 0.045)');
+      centerGlow.addColorStop(0.55, 'rgba(255, 255, 255, 0.015)');
+      centerGlow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = centerGlow;
+      ctx.fillRect(0, 0, width, height);
+
+      // 1. Draw Curved Constellation Filaments + Traveling Chrome Light Particles
       for (let i = 0; i < edges.length; i++) {
         const e = edges[i];
-        const u = nodeById[e.from];
-        const v = nodeById[e.to];
+        const u = nodeById[e.from]; // project
+        const v = nodeById[e.to];   // skill
         if (!u || !v) continue;
+        if (filterMode === 'core' && !v.isCoreBet) continue;
 
-        const isEdgeActive = focusNode
-          ? (focusNode.id === u.id || focusNode.id === v.id)
-          : false;
+        const isHighlighted = focusNode && (focusNode.id === u.id || focusNode.id === v.id);
 
         ctx.beginPath();
+        const mx = (u.x + v.x) * 0.5 + (cx - (u.x + v.x) * 0.5) * 0.12;
+        const my = (u.y + v.y) * 0.5 + (cy - (u.y + v.y) * 0.5) * 0.12;
         ctx.moveTo(u.x, u.y);
-        ctx.lineTo(v.x, v.y);
+        ctx.quadraticCurveTo(mx, my, v.x, v.y);
 
         if (focusNode) {
-          if (isEdgeActive) {
-            ctx.strokeStyle = 'rgba(250, 250, 250, 0.58)';
-            ctx.lineWidth = 1.4;
+          if (isHighlighted) {
+            ctx.strokeStyle = v.isCoreBet ? 'rgba(255, 255, 255, 0.78)' : 'rgba(212, 212, 220, 0.48)';
+            ctx.lineWidth = v.isCoreBet ? 1.85 : 1.25;
           } else {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
-            ctx.lineWidth = 0.85;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+            ctx.lineWidth = 0.7;
           }
         } else {
-          if (v.isShared) {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
-            ctx.lineWidth = 1.1;
-          } else {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.095)';
-            ctx.lineWidth = 0.95;
-          }
+          ctx.strokeStyle = v.isCoreBet ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.055)';
+          ctx.lineWidth = v.isCoreBet ? 1.15 : 0.75;
         }
         ctx.stroke();
-      }
 
-      // 2. Draw Monochrome Nodes & Floating Editorial Labels (No Sticker Boxes)
-      for (let pass = 0; pass < 2; pass++) {
-        for (let i = 0; i < nodes.length; i++) {
-          const n = nodes[i];
-          if ((pass === 0 && n.type === 'venture') || (pass === 1 && n.type !== 'venture')) {
-            continue;
-          }
-
-          const isNodeActive = !activeSet || activeSet.has(n.id);
-          const isFocusedSelf = focusNode && focusNode.id === n.id;
-          const alpha = isNodeActive ? 1.0 : 0.18;
-
-          ctx.save();
-          ctx.globalAlpha = alpha;
-
-          if (n.type === 'venture') {
-            // Subtle architectural concentric ring
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.radius + (isFocusedSelf ? 7.5 : 5.5), 0, Math.PI * 2);
-            ctx.fillStyle = isFocusedSelf ? 'rgba(255, 255, 255, 0.07)' : 'rgba(255, 255, 255, 0.035)';
-            ctx.fill();
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = isFocusedSelf ? 'rgba(255, 255, 255, 0.50)' : 'rgba(255, 255, 255, 0.20)';
-            ctx.stroke();
-
-            // Pure alabaster venture hub dot
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#fafafa';
-            ctx.fill();
-            ctx.lineWidth = 1.5;
-            ctx.strokeStyle = '#161617';
-            ctx.stroke();
-          } else if (n.isShared) {
-            // Shared bridge skill dot (refined silver-white with delicate outer ring)
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.radius + 3.5, 0, Math.PI * 2);
-            ctx.lineWidth = 0.85;
-            ctx.strokeStyle = (isFocusedSelf || (focusNode && isNodeActive))
-              ? 'rgba(255, 255, 255, 0.36)'
-              : 'rgba(255, 255, 255, 0.12)';
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-            ctx.fillStyle = (isFocusedSelf || (focusNode && isNodeActive)) ? '#fafafa' : '#d4d4d8';
-            ctx.fill();
-            ctx.lineWidth = 1.25;
-            ctx.strokeStyle = '#161617';
-            ctx.stroke();
-          } else {
-            // Venture-specific skill dot (minimal gunmetal/silver dot)
-            if (isFocusedSelf) {
-              ctx.beginPath();
-              ctx.arc(n.x, n.y, n.radius + 3.5, 0, Math.PI * 2);
-              ctx.lineWidth = 0.85;
-              ctx.strokeStyle = 'rgba(255, 255, 255, 0.32)';
-              ctx.stroke();
-            }
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-            ctx.fillStyle = (focusNode && isNodeActive) ? '#e4e4e7' : '#71717a';
-            ctx.fill();
-            ctx.lineWidth = 1.25;
-            ctx.strokeStyle = '#161617';
-            ctx.stroke();
-          }
-
-          // 3. Pure Floating Typography (No pill/sticker box, soft canvas-matched text halo for legibility)
-          const fontSize = n.type === 'venture'
-            ? (isCompact ? 12 : 13)
-            : (n.isShared ? (isCompact ? 10.5 : 11.5) : (isCompact ? 10 : 11));
-          const fontWeight = n.type === 'venture' ? '500' : '400';
-          ctx.font = fontWeight + ' ' + fontSize + 'px Inter, -apple-system, BlinkMacSystemFont, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'top';
-
-          const labelY = n.y + n.radius + (n.type === 'venture' ? 10 : 7);
-          const halfLabel = ctx.measureText(n.label).width / 2 + 6;
-          const labelX = Math.max(halfLabel, Math.min(width - halfLabel, n.x));
-
-          ctx.shadowColor = 'rgba(22, 22, 23, 0.95)';
-          ctx.shadowBlur = 6;
-          ctx.lineWidth = 3;
-          ctx.strokeStyle = 'rgba(22, 22, 23, 0.88)';
-          ctx.strokeText(n.label, labelX, labelY);
-
-          ctx.fillStyle = n.type === 'venture'
-            ? '#fafafa'
-            : ((focusNode && isNodeActive) ? '#fafafa' : (n.isShared ? '#d4d4d8' : '#8e8e93'));
-          ctx.fillText(n.label, labelX, labelY);
-
-          ctx.restore();
+        if (isHighlighted) {
+          const t = pulsePhase;
+          const omt = 1 - t;
+          const px = omt * omt * u.x + 2 * omt * t * mx + t * t * v.x;
+          const py = omt * omt * u.y + 2 * omt * t * my + t * t * v.y;
+          ctx.beginPath();
+          ctx.arc(px, py, 2.1, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
         }
       }
+
+      // 2. Draw Outer Perimeter Specialist Skill Stars
+      if (filterMode !== 'core') {
+        nodes.forEach(function (s) {
+          if (s.type !== 'skill' || s.isCoreBet) return;
+          const isConnected = !activeSet || activeSet.has(s.id);
+          const isDirectHover = focusNode && focusNode.id === s.id;
+
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+          ctx.fillStyle = isDirectHover
+            ? '#ffffff'
+            : (isConnected ? (focusNode ? '#e4e4e7' : 'rgba(165, 165, 175, 0.74)') : 'rgba(110, 110, 120, 0.18)');
+          ctx.fill();
+
+          const showOuterLabel = isCompact
+            ? (focusNode && isConnected)
+            : ((focusNode && isConnected) || (!focusNode && (s.degree >= 2 || s.outerIdx % 2 === 0)));
+
+          if (showOuterLabel) {
+            const label = s.label + ' · ' + s.degree;
+            ctx.font = (focusNode && isConnected)
+              ? (isCompact ? '500 10px Inter, sans-serif' : '500 11px Inter, sans-serif')
+              : (isCompact ? '400 9.5px Inter, sans-serif' : '400 10.5px Inter, sans-serif');
+            ctx.fillStyle = (focusNode && isConnected) ? '#f4f4f6' : 'rgba(169, 169, 169, 0.66)';
+            const lw = ctx.measureText(label).width;
+            const isRight = s.x >= cx;
+            if (isRight && s.x + s.radius + 6 + lw <= width - 10) {
+              ctx.textAlign = 'left';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(label, s.x + s.radius + 6, s.y);
+            } else if (!isRight && s.x - s.radius - 6 - lw >= 10) {
+              ctx.textAlign = 'right';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(label, s.x - s.radius - 6, s.y);
+            } else {
+              ctx.textAlign = 'center';
+              ctx.textBaseline = s.y < cy ? 'bottom' : 'top';
+              const clampedX = Math.max(lw * 0.5 + 10, Math.min(width - lw * 0.5 - 10, s.x));
+              ctx.fillText(label, clampedX, s.y + (s.y < cy ? -s.radius - 5 : s.radius + 5));
+            }
+          }
+        });
+      }
+
+      // 3. Draw Middle Ring: Shipped Project Beacons (Tactile Chrome-Ringed Nodes + Pill Labels)
+      nodes.forEach(function (p) {
+        if (p.type !== 'venture') return;
+        const isConnected = !activeSet || activeSet.has(p.id);
+        const isFocused = focusNode && focusNode.id === p.id;
+
+        // Outer subtle ring around project node
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius + 3.5, 0, Math.PI * 2);
+        ctx.strokeStyle = isFocused
+          ? 'rgba(255, 255, 255, 0.78)'
+          : (isConnected ? 'rgba(255, 255, 255, 0.24)' : 'rgba(255, 255, 255, 0.04)');
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Project core circle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = isConnected ? '#232327' : 'rgba(28, 28, 32, 0.4)';
+        ctx.fill();
+        ctx.strokeStyle = isConnected ? '#f7f7f7' : 'rgba(160, 160, 170, 0.22)';
+        ctx.lineWidth = isFocused ? 2.2 : 1.5;
+        ctx.stroke();
+
+        // Inner bright center dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.8, 0, Math.PI * 2);
+        ctx.fillStyle = isConnected ? '#ffffff' : 'rgba(255, 255, 255, 0.2)';
+        ctx.fill();
+
+        // Crisp pill label below project beacon
+        const displayLabel = (isCompact && p.label === 'ACCA Onboarding Redesign')
+          ? 'ACCA Onboarding'
+          : ((isCompact && p.label === 'Amazon Rufus Rollout') ? 'Amazon Rufus' : p.label);
+        ctx.font = isCompact ? '500 10.5px Inter, sans-serif' : '500 11.5px Inter, sans-serif';
+        const tw = ctx.measureText(displayLabel).width;
+        const pw = tw + (isCompact ? 10 : 14);
+        const ph = isCompact ? 18 : 20;
+        const lx = Math.max(pw * 0.5 + 6, Math.min(width - pw * 0.5 - 6, p.x + (p.x - cx) * 0.06));
+        const ly = p.y + p.radius + (isCompact ? 12 : 14);
+
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(lx - pw / 2, ly - ph / 2, pw, ph, 6);
+        } else {
+          ctx.rect(lx - pw / 2, ly - ph / 2, pw, ph);
+        }
+        ctx.fillStyle = isConnected ? 'rgba(20, 20, 22, 0.92)' : 'rgba(20, 20, 22, 0.38)';
+        ctx.fill();
+        ctx.strokeStyle = isFocused
+          ? 'rgba(255, 255, 255, 0.65)'
+          : (isConnected ? 'rgba(255, 255, 255, 0.18)' : 'rgba(255, 255, 255, 0.04)');
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.fillStyle = isConnected ? '#f7f7f7' : 'rgba(169, 169, 169, 0.3)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(displayLabel, lx, ly + 0.5);
+      });
+
+      // 4. Draw Inner Ring: Top 8 Compounding "Core Bet" Stars with Proportional Aura & ×N Badge
+      nodes.forEach(function (s) {
+        if (s.type !== 'skill' || !s.isCoreBet) return;
+        const isConnected = !activeSet || activeSet.has(s.id);
+        const isFocused = focusNode && focusNode.id === s.id;
+
+        if (isConnected) {
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.radius + (isCompact ? 4.2 : 5.5), 0, Math.PI * 2);
+          ctx.fillStyle = isFocused ? 'rgba(255, 255, 255, 0.18)' : 'rgba(255, 255, 255, 0.07)';
+          ctx.fill();
+          ctx.strokeStyle = isFocused ? 'rgba(255, 255, 255, 0.65)' : 'rgba(255, 255, 255, 0.24)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        ctx.save();
+        if (isConnected) {
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.65)';
+          ctx.shadowBlur = isFocused ? 16 : 10;
+        }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = isConnected ? '#ffffff' : 'rgba(255, 255, 255, 0.2)';
+        ctx.fill();
+        ctx.restore();
+
+        // High-contrast Core Bet label + ×N project count
+        const txt = s.label + ' · ×' + s.degree;
+        ctx.font = isCompact ? '600 10px Inter, sans-serif' : '600 11.5px Inter, sans-serif';
+        const tw = ctx.measureText(txt).width;
+        const bw = tw + (isCompact ? 10 : 14);
+        const bh = isCompact ? 18 : 20;
+        const isTopCenter = (s.y < cy - (isCompact ? 38 : 55) && Math.abs(s.x - cx) < 35);
+        const rawLx = s.x + (Math.abs(s.x - cx) > 30 ? Math.sign(s.x - cx) * (isCompact ? 8 : 14) : 0);
+        const lx = Math.max(bw * 0.5 + 6, Math.min(width - bw * 0.5 - 6, rawLx));
+        const ly = s.y + (isTopCenter ? -s.radius - (isCompact ? 13 : 16) : s.radius + (isCompact ? 13 : 15));
+
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(lx - bw / 2, ly - bh / 2, bw, bh, 999);
+        } else {
+          ctx.rect(lx - bw / 2, ly - bh / 2, bw, bh);
+        }
+        ctx.fillStyle = isConnected ? 'rgba(15, 15, 17, 0.94)' : 'rgba(15, 15, 17, 0.4)';
+        ctx.fill();
+        ctx.strokeStyle = isFocused
+          ? '#ffffff'
+          : (isConnected ? 'rgba(255, 255, 255, 0.34)' : 'rgba(255, 255, 255, 0.06)');
+        ctx.lineWidth = isFocused ? 1.4 : 1;
+        ctx.stroke();
+
+        ctx.fillStyle = isConnected ? '#ffffff' : 'rgba(169, 169, 169, 0.3)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(txt, lx, ly + 0.5);
+      });
 
       ctx.restore();
     }
 
     function tick() {
-      if (dragNode || simAlpha > 0.042) {
-        stepPhysics();
-      }
+      stepPhysics();
       renderGraph();
       animFrameId = window.requestAnimationFrame(tick);
     }
@@ -1214,11 +1296,11 @@
       if (!initialized) {
         initialized = true;
         simAlpha = 1.0;
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 55; i++) {
           stepPhysics();
         }
       } else {
-        simAlpha = Math.max(simAlpha, 0.45);
+        simAlpha = Math.max(simAlpha, 0.5);
       }
       renderGraph();
     }
@@ -1234,17 +1316,19 @@
     }
 
     function findNodeAt(x, y) {
-      // Check venture hubs first, then skills
+      let best = null;
+      let bestDist = Infinity;
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
-        const hitRadius = n.radius + 14;
-        const dx = x - n.x;
-        const dy = y - n.y;
-        if (dx * dx + dy * dy <= hitRadius * hitRadius) {
-          return n;
+        if (filterMode === 'core' && n.type === 'skill' && !n.isCoreBet) continue;
+        const hitR = n.type === 'venture' ? 24 : (n.isCoreBet ? 22 : 14);
+        const d = Math.hypot(x - n.x, y - n.y);
+        if (d <= hitR && d < bestDist) {
+          best = n;
+          bestDist = d;
         }
       }
-      return null;
+      return best;
     }
 
     canvas.addEventListener('pointerdown', function (e) {
@@ -1253,6 +1337,7 @@
       pointerDownPos = { x: pt.x, y: pt.y, hitNode: hit };
       if (hit) {
         dragNode = hit;
+        hoverNode = hit;
         simAlpha = 1.0;
         canvas.classList.add('is-dragging');
         if (canvas.setPointerCapture && e.pointerId !== undefined) {
@@ -1265,9 +1350,10 @@
       const pt = getPointerCoords(e);
       if (dragNode) {
         const padX = 36;
-        const padY = 28;
+        const padTop = 52;
+        const padBottom = 28;
         dragNode.x = Math.max(padX, Math.min(width - padX, pt.x));
-        dragNode.y = Math.max(padY, Math.min(height - padY, pt.y));
+        dragNode.y = Math.max(padTop, Math.min(height - padBottom, pt.y));
         dragNode.vx = 0;
         dragNode.vy = 0;
         simAlpha = 0.92;
@@ -1294,7 +1380,7 @@
       }
       if (dragNode) {
         dragNode = null;
-        simAlpha = 0.65;
+        simAlpha = 0.85;
         canvas.classList.remove('is-dragging');
       }
       pointerDownPos = null;
@@ -1308,7 +1394,19 @@
       }
     });
 
-    const resetBtn = canvas.parentElement.querySelector('[data-graph-reset]');
+    if (panelEl) {
+      const filterBtns = panelEl.querySelectorAll('[data-graph-filter]');
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          filterMode = btn.getAttribute('data-graph-filter') || 'all';
+          simAlpha = 0.9;
+        });
+      });
+    }
+
+    const resetBtn = panelEl ? panelEl.querySelector('[data-graph-reset]') : null;
     if (resetBtn) {
       resetBtn.addEventListener('click', function () {
         selectedNode = (defaultProjId && nodeById['venture:' + defaultProjId])
@@ -1319,7 +1417,7 @@
         nodes.forEach(function (n) { n.vx = 0; n.vy = 0; });
         computeAnchorsAndSeed(false);
         simAlpha = 1.0;
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 55; i++) {
           stepPhysics();
         }
         renderGraph();
