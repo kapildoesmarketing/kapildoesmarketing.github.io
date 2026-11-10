@@ -306,7 +306,7 @@
       'VERSION:3.0',
       'N:Pidhwani;Kapil;;;',
       'FN:Kapil Pidhwani',
-      'TITLE:Marketing Strategist & GTM Builder',
+      'TITLE:Revenue Strategy, BizOps & AI',
       'EMAIL;TYPE=INTERNET,WORK:kapildoesmarketing@gmail.com',
       'URL:https://kapilpidhwani.in',
       'ITEM1.URL:https://www.linkedin.com/in/kapilpidhwani/',
@@ -314,7 +314,7 @@
       'ITEM2.URL:https://github.com/kapildoesmarketing',
       'ITEM2.X-ABLabel:GitHub',
       'ADR;TYPE=WORK:;;Gurgaon;Haryana;;India',
-      'NOTE:Marketing Strategist & GTM Builder - Strategies & solutions that unlock revenue.',
+      'NOTE:Revenue Strategy, BizOps & AI - Strategies & solutions that unlock revenue.',
       'END:VCARD'
     ].join('\r\n');
     const blob = new Blob([vcardLines], { type: 'text/vcard;charset=utf-8' });
@@ -440,10 +440,10 @@
 
   // Contact Page: Topic Selector Pills, Inquiry Form Dispatch & FAQ Accordion
   const topicPills = document.querySelectorAll('[data-contact-topic]');
-  let selectedContactTopic = 'GTM & Revenue Strategy';
+  let selectedContactTopic = 'Strategy & BizOps';
   topicPills.forEach(function (pill) {
     pill.addEventListener('click', function () {
-      selectedContactTopic = pill.getAttribute('data-contact-topic') || 'General';
+      selectedContactTopic = pill.getAttribute('data-contact-topic') || 'Leadership / General';
       topicPills.forEach(function (p) {
         p.classList.toggle('is-active', p === pill);
       });
@@ -477,7 +477,7 @@
 
       if (submitBtn) submitBtn.disabled = true;
       if (submitLabel) submitLabel.textContent = 'Sending...';
-      if (statusEl) statusEl.textContent = 'Submitting your enquiry...';
+      if (statusEl) statusEl.textContent = 'Submitting your message...';
 
       const payload = new URLSearchParams();
       payload.append(GOOGLE_FORM_FIELDS.name, nameVal);
@@ -490,20 +490,20 @@
         mode: 'no-cors',
         body: payload
       }).then(function () {
-        if (submitLabel) submitLabel.textContent = 'Enquiry sent \u2713';
+        if (submitLabel) submitLabel.textContent = 'Message sent \u2713';
         if (statusEl) {
-          statusEl.textContent = 'Thanks \u00b7 Your message was received. I\u2019ll reply within 24 hours.';
+          statusEl.textContent = 'Thanks \u00b7 Your message was received. I\u2019ll reply within one business day.';
         }
         contactForm.reset();
         setTimeout(function () {
           if (submitBtn) submitBtn.disabled = false;
-          if (submitLabel) submitLabel.textContent = 'Send enquiry';
+          if (submitLabel) submitLabel.textContent = 'Send message';
         }, 4000);
       }).catch(function () {
         if (submitBtn) submitBtn.disabled = false;
         if (submitLabel) submitLabel.textContent = 'Message prepared \u2713';
         if (statusEl) statusEl.textContent = 'Opening email draft to kapildoesmarketing@gmail.com...';
-        const subject = encodeURIComponent('[' + selectedContactTopic + '] Inquiry from ' + nameVal);
+        const subject = encodeURIComponent('[' + selectedContactTopic + '] Message from ' + nameVal);
         const body = encodeURIComponent(
           'Hi Kapil,\n\n' +
           msgVal + '\n\n' +
@@ -575,20 +575,44 @@
     btn.addEventListener('click', closeQr);
   });
 
+  document.querySelectorAll('[data-share-qr]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const shareUrl = btn.getAttribute('data-share-qr') || 'https://kapilpidhwani.in/links/';
+      const labelEl = btn.querySelector('[data-share-qr-label]');
+      const defaultText = labelEl ? labelEl.textContent : 'Share link';
+      function showCopiedLink() {
+        if (labelEl) labelEl.textContent = 'Copied link \u2713';
+        setTimeout(function () {
+          if (labelEl) labelEl.textContent = defaultText;
+        }, 2000);
+      }
+      if (navigator.share) {
+        navigator.share({
+          title: 'Kapil Pidhwani - Links',
+          url: shareUrl
+        }).catch(function () {});
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(showCopiedLink).catch(showCopiedLink);
+      } else {
+        showCopiedLink();
+      }
+    });
+  });
+
   /* Deisgned by Kapil Pidhwani: Zero-dependency Command Palette Search (ceiling: in-memory array filter; upgrade path: JSON search index if site exceeds 100 pages). */
   const searchCatalog = [
     { title: 'Home', sub: 'Strategies & solutions that unlock revenue', badge: 'Page', route: 'home' },
     { title: 'About Kapil Pidhwani', sub: 'Google, Amazon, ACCA, Experience & Tools', badge: 'Page', route: 'about' },
-    { title: 'Selected Work', sub: 'Web Apps & Operator Builds', badge: 'Page', route: 'work' },
+    { title: 'Selected Work', sub: 'Transformations, Flagship Events & Solutions', badge: 'Page', route: 'work' },
     { title: 'Playbooks & Presentations', sub: 'Interactive HTML slide decks & AI prompt libraries', badge: 'Page', route: 'playbooks' },
     { title: 'Links & Networking Hub', sub: 'Connect on LinkedIn, Save Contact, Copy Email & QR', badge: 'Page', route: 'links' },
-    { title: 'Contact', sub: 'Start a project, consulting or speaking inquiry', badge: 'Page', route: 'contact' },
+    { title: 'Contact', sub: 'Leadership, speaking, AI systems or strategy exchange', badge: 'Page', route: 'contact' },
     { title: 'Playbook 01: Fix Your LinkedIn Profile in 15 Steps', sub: '12 interactive slides, 15-point checklist & 5 AI prompts', badge: 'Playbook', url: '/playbooks/linkedin-profile-playbook/' },
-    { title: 'Fundingly.in (Project Page)', sub: 'Indian startup funding intelligence tracker & video engine', badge: 'Web App', url: '/work/fundingly/' },
-    { title: 'Toolity.in (Project Page)', sub: 'Suite of zero-bloat web utilities for marketers & operators', badge: 'Web App', url: '/work/toolity/' },
-    { title: 'Google Think Travel (Project Page)', sub: 'Google India flagship summit for travel & hospitality leaders', badge: 'Event', url: '/work/think-travel-2026/' },
     { title: 'Amazon Rufus Rollout (Project Page)', sub: 'Zero-to-one rollout of Amazon Rufus AI to US childcare sellers', badge: 'Transformation', url: '/work/amazon-rufus-rollout/' },
     { title: 'ACCA Onboarding Redesign (Project Page)', sub: 'Eight-week new-hire programme rebuilt into four; QA 60 to 85+', badge: 'Transformation', url: '/work/onboarding-redesign/' },
+    { title: 'Google Think Travel (Project Page)', sub: 'Google India flagship summit for travel & hospitality leaders', badge: 'Event', url: '/work/think-travel-2026/' },
+    { title: 'Fundingly.in (Project Page)', sub: 'Indian startup funding intelligence tracker & video engine', badge: 'Solution', url: '/work/fundingly/' },
+    { title: 'Toolity.in (Project Page)', sub: 'Suite of zero-bloat web utilities for marketers & operators', badge: 'Solution', url: '/work/toolity/' },
     { title: 'Privacy Policy', sub: 'Data privacy & analytics policy for kapilpidhwani.in', badge: 'Legal', url: '/privacy-policy/' },
     { title: 'Terms of Service', sub: 'Website usage terms & intellectual property notice', badge: 'Legal', url: '/terms-of-service/' },
     { title: 'Cookie Policy', sub: 'Local storage & minimal cookie usage details', badge: 'Legal', url: '/cookie-policy/' },
@@ -733,6 +757,7 @@
     {
       id: 'fundingly',
       label: 'Fundingly.in',
+      meta: 'Solution \u00b7 2026',
       skills: [
         'Market Research', 'Data Analysis', 'Google Sheets', 'Content Strategy', 'Competitive Analysis',
         'Product Management', 'SEO', 'Workflow Automation', 'UI/UX Design', 'Web Development'
@@ -741,6 +766,7 @@
     {
       id: 'toolity',
       label: 'Toolity.in',
+      meta: 'Solution \u00b7 2026',
       skills: [
         'Product Management', 'SEO', 'Workflow Automation', 'UI/UX Design', 'Web Development',
         'Product Marketing', 'Prompt Engineering', 'User Research', 'Growth Strategy', 'Conversion Optimization'
@@ -749,6 +775,7 @@
     {
       id: 'think-travel-2026',
       label: 'Google Think Travel',
+      meta: 'Event \u00b7 2026',
       skills: [
         'Content Strategy', 'UI/UX Design', 'Product Marketing', 'Market Research', 'Workflow Automation',
         'Growth Strategy', 'Event Marketing', 'Executive Communications', 'Brand Identity', 'Stakeholder Management'
@@ -757,6 +784,7 @@
     {
       id: 'onboarding-redesign',
       label: 'ACCA Onboarding Redesign',
+      meta: 'Transformation \u00b7 2023',
       skills: [
         'Training Design', 'Team Leadership', 'Operations', 'Process Design', 'Coaching',
         'Stakeholder Management', 'Change Management', 'Customer Experience', 'Workflow Automation', 'Content Strategy'
@@ -765,6 +793,7 @@
     {
       id: 'amazon-rufus-rollout',
       label: 'Amazon Rufus Rollout',
+      meta: 'Transformation \u00b7 2024',
       skills: [
         'Go-To-Market Strategy', 'Sales Enablement', 'Product Marketing', 'Stakeholder Management', 'Change Management',
         'Customer Experience', 'Data Analysis', 'Content Strategy', 'Training Design', 'Growth Strategy'
@@ -790,6 +819,7 @@
         id: 'venture:' + proj.id,
         rawId: proj.id,
         label: proj.label,
+        meta: proj.meta || 'Case Study',
         type: 'venture',
         ventureIndex: idx,
         degree: proj.skills.length,
@@ -1279,9 +1309,78 @@
       ctx.restore();
     }
 
+    /* Deisgned by Kapil Pidhwani: Non-accidental glassmorphic destination preview popover on project nodes (ceiling: single reused DOM card; upgrade path: none needed). */
+    let popoverEl = null;
+    let activePopoverNode = null;
+    if (panelEl) {
+      popoverEl = panelEl.querySelector('.sf-graph-popover');
+      if (!popoverEl) {
+        popoverEl = document.createElement('div');
+        popoverEl.className = 'sf-graph-popover';
+        popoverEl.hidden = true;
+        popoverEl.setAttribute('role', 'dialog');
+        popoverEl.setAttribute('aria-label', 'Case study preview');
+        popoverEl.addEventListener('pointerdown', function (ev) {
+          ev.stopPropagation();
+        });
+        panelEl.appendChild(popoverEl);
+      }
+    }
+
+    function hidePopover() {
+      activePopoverNode = null;
+      if (popoverEl) {
+        popoverEl.hidden = true;
+      }
+    }
+
+    function positionPopover(vNode) {
+      if (!popoverEl || !vNode) return;
+      const cardW = Math.min(304, width - 24);
+      const cardH = 124;
+      let left = Math.round(vNode.x - cardW * 0.5);
+      let top = Math.round(vNode.y + (vNode.radius || 10) + 38);
+      if (top + cardH > height - 12) {
+        top = Math.round(vNode.y - cardH - (vNode.radius || 10) - 16);
+      }
+      left = Math.max(12, Math.min(width - cardW - 12, left));
+      top = Math.max(50, Math.min(height - cardH - 12, top));
+      popoverEl.style.left = left + 'px';
+      popoverEl.style.top = top + 'px';
+    }
+
+    function showProjectPopover(vNode) {
+      if (!popoverEl || !vNode) return;
+      activePopoverNode = vNode;
+      const slug = vNode.rawId;
+      const isCurrentPage = Boolean(defaultProjId && defaultProjId === slug);
+      const actionHtml = isCurrentPage
+        ? '<span class="sf-graph-popover-current">Currently viewing this page</span>'
+        : '<a href="/work/' + slug + '/" class="sf-graph-popover-cta"><span>View case study</span><span aria-hidden="true">&rarr;</span></a>';
+      popoverEl.innerHTML =
+        '<div class="sf-graph-popover-top">' +
+          '<span class="sf-graph-popover-cat">' + (vNode.meta || 'Case Study') + '</span>' +
+          '<button type="button" class="sf-graph-popover-close" aria-label="Close preview">&times;</button>' +
+        '</div>' +
+        '<p class="sf-graph-popover-title">' + vNode.label + '</p>' +
+        '<p class="sf-graph-popover-url">kapilpidhwani.in/work/' + slug + '/</p>' +
+        actionHtml;
+      const closeBtn = popoverEl.querySelector('.sf-graph-popover-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          hidePopover();
+        });
+      }
+      popoverEl.hidden = false;
+      positionPopover(vNode);
+    }
+
     function tick() {
       stepPhysics();
       renderGraph();
+      if (activePopoverNode && popoverEl && !popoverEl.hidden) {
+        positionPopover(activePopoverNode);
+      }
       animFrameId = window.requestAnimationFrame(tick);
     }
 
@@ -1303,6 +1402,9 @@
         simAlpha = Math.max(simAlpha, 0.5);
       }
       renderGraph();
+      if (activePopoverNode && popoverEl && !popoverEl.hidden) {
+        positionPopover(activePopoverNode);
+      }
     }
 
     function getPointerCoords(evt) {
@@ -1349,6 +1451,10 @@
     canvas.addEventListener('pointermove', function (e) {
       const pt = getPointerCoords(e);
       if (dragNode) {
+        const moved = pointerDownPos ? Math.hypot(pt.x - pointerDownPos.x, pt.y - pointerDownPos.y) : 99;
+        if (moved >= 6) {
+          hidePopover();
+        }
         const padX = 36;
         const padTop = 52;
         const padBottom = 28;
@@ -1362,7 +1468,7 @@
       const hit = findNodeAt(pt.x, pt.y);
       if (hit !== hoverNode) {
         hoverNode = hit;
-        canvas.style.cursor = hit ? 'grab' : 'default';
+        canvas.style.cursor = hit ? (hit.type === 'venture' ? 'pointer' : 'grab') : 'default';
       }
     });
 
@@ -1371,9 +1477,20 @@
         const pt = getPointerCoords(e);
         const movedDist = Math.hypot(pt.x - pointerDownPos.x, pt.y - pointerDownPos.y);
         if (movedDist < 6) {
-          if (pointerDownPos.hitNode) {
-            selectedNode = (selectedNode === pointerDownPos.hitNode) ? null : pointerDownPos.hitNode;
+          const hit = pointerDownPos.hitNode;
+          if (hit && hit.type === 'venture') {
+            if (activePopoverNode === hit && popoverEl && !popoverEl.hidden) {
+              hidePopover();
+              selectedNode = null;
+            } else {
+              selectedNode = hit;
+              showProjectPopover(hit);
+            }
+          } else if (hit) {
+            hidePopover();
+            selectedNode = (selectedNode === hit) ? null : hit;
           } else {
+            hidePopover();
             selectedNode = null;
           }
         }
@@ -1394,10 +1511,17 @@
       }
     });
 
+    window.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape') {
+        hidePopover();
+      }
+    });
+
     if (panelEl) {
       const filterBtns = panelEl.querySelectorAll('[data-graph-filter]');
       filterBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
+          hidePopover();
           filterBtns.forEach(function (b) { b.classList.remove('is-active'); });
           btn.classList.add('is-active');
           filterMode = btn.getAttribute('data-graph-filter') || 'all';
@@ -1521,7 +1645,7 @@
     const bodyText = document.body.innerText || '';
 
     console.assert(JSON.stringify(mainLinks) === JSON.stringify(['Home', 'About', 'Work', 'Playbooks', 'Links']), 'Main nav mismatch', mainLinks);
-    console.assert(JSON.stringify(connectLinks) === JSON.stringify(['Contact', 'LinkedIn', 'GitHub']), 'Connect nav mismatch', connectLinks);
+    console.assert(JSON.stringify(connectLinks) === JSON.stringify(['Contact', 'LinkedIn', 'GitHub', 'Ask Google AI']), 'Connect nav mismatch', connectLinks);
     console.assert(!document.querySelector('.sf-actions-tray [name="Start a project"]'), 'Sidebar primary CTA should not be present');
     console.assert(views.length === 1 && hiddenViews.length === 0, 'Modular page must contain exactly 1 active view and 0 hidden views', views.length, hiddenViews.length);
     console.assert(Boolean(externalCss) && Boolean(externalJs), 'Modular page must link /assets/css/main.css and /assets/js/main.js');

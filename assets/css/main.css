@@ -4478,3 +4478,162 @@ button {
     display: none;
   }
 }
+
+/* Personalized QR Center Portrait + Native Share Actions */
+.sf-qr-box {
+  position: relative;
+  width: 224px;
+  height: 224px;
+}
+
+.sf-qr-avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46px;
+  height: 46px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background-color: #faf9f6;
+  padding: 3px;
+  box-shadow: 0 2px 8px rgba(10, 10, 10, 0.16);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sf-qr-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  display: block;
+}
+
+.sf-qr-actions {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.sf-qr-actions .sf-btn-secondary {
+  flex: 1 1 0;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+}
+
+/* Knowledge Graph — Seamless Project Destination Preview Popover (B6) */
+.sf-graph-popover {
+  position: absolute;
+  z-index: 8;
+  width: 304px;
+  max-width: calc(100% - 24px);
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border-radius: 13px;
+  background-color: rgba(18, 18, 20, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.sf-graph-popover[hidden] {
+  display: none !important;
+}
+
+.sf-graph-popover-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sf-graph-popover-cat {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--token-944a5ffb);
+  letter-spacing: 0.01em;
+}
+
+.sf-graph-popover-close {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--token-944a5ffb);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.sf-graph-popover-close:hover {
+  color: var(--token-9cf0210b);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sf-graph-popover-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--token-9cf0210b);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.sf-graph-popover-url {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #8e8e93;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.sf-graph-popover-cta {
+  margin-top: 2px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background-color: #f4f4f6;
+  color: #0a0a0a;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.15s ease;
+}
+
+.sf-graph-popover-cta:hover {
+  background-color: #ffffff;
+}
+
+.sf-graph-popover-current {
+  margin-top: 2px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--token-944a5ffb);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

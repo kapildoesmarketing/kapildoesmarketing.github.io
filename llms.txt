@@ -1,28 +1,28 @@
 # Kapil Pidhwani
 
-> Kapil Pidhwani is a Marketing Strategist, Business Operations leader (Google, ex-Amazon) and creator of the web apps Fundingly.in and Toolity.in. Across 6+ years in tech and enterprise operations, he has shipped 100+ GTM and AI workflow solutions, unlocked $10M+ in incremental revenue, automated 40+ hours per week of executive reporting and served 50+ teams and founders.
+> Kapil Pidhwani is a Revenue Strategy, Business Operations and AI operator (Google, ex-Amazon) and creator of the shipped solutions Fundingly.in and Toolity.in. Across 6+ years in global tech and enterprise operations, he has shipped 100+ GTM and AI workflow solutions, unlocked $10M+ in incremental revenue, automated 40+ hours per week of executive reporting and enabled 50+ enterprise accounts and pods.
 
 ## Key Pages & Canonical Directory
 
-- [Home](https://kapilpidhwani.in/): Overview of Kapil Pidhwani's revenue strategy, BizOps and AI systems practice (`100+` solutions shipped, `6+` years experience, `50+` teams and founders served), including Expertise, Playbooks, Endorsements and Capabilities knowledge graph.
-- [About & Career Track Record](https://kapilpidhwani.in/about/): Core capabilities, career timeline across Google, Amazon, Mihir Infinite (ACCA) and Nurseera (US Healthcare), tools used and academic credentials.
-- [Selected Work](https://kapilpidhwani.in/work/): Shipped web applications (`Fundingly.in` and `Toolity.in`) flagship events (`Google Think Travel`) and transformations (`ACCA Onboarding Redesign`) with flow diagrams, decisions and collaborators.
+- [Home](https://kapilpidhwani.in/): Overview of Kapil Pidhwani's revenue strategy, BizOps and AI systems work (`100+` solutions shipped, `6+` years experience, `50+` accounts and pods enabled), including Expertise, Playbooks, Endorsements and Capabilities knowledge graph.
+- [About & Career Track Record](https://kapilpidhwani.in/about/): Core capabilities, career timeline across Google, Amazon, Mihir Infinite Services (ACCA) and Nurseera (US Healthcare), tools used and academic credentials.
+- [Selected Work](https://kapilpidhwani.in/work/): Enterprise transformations (`Amazon Rufus Rollout` and `ACCA Onboarding Redesign`), flagship events (`Google Think Travel`) and zero-to-one solutions (`Fundingly.in` and `Toolity.in`).
 - [Playbooks & Presentations Hub](https://kapilpidhwani.in/playbooks/): Library of interactive HTML slide decks, tactical GTM frameworks and copy-paste AI prompt systems.
-- [Links & Networking Hub](https://kapilpidhwani.in/links/): Direct networking hub with 1-click vCard download (`.vcf`), email copy (`kapildoesmarketing@gmail.com`), QR code, LinkedIn and GitHub.
-- [Contact](https://kapilpidhwani.in/contact/): Consulting, AI workflow automation, university workshops and keynote speaking inquiries.
+- [Links & Networking Hub](https://kapilpidhwani.in/links/): Direct networking hub with 1-click vCard download (`.vcf`), email copy (`kapildoesmarketing@gmail.com`), personalized QR code, LinkedIn, GitHub and Google AI search.
+- [Contact](https://kapilpidhwani.in/contact/): Leadership opportunities, keynote speaking, university workshops, AI workflow exchange and strategic collaborations.
 
-## Shipped Web Apps
+## Selected Work (Transformations, Events & Solutions)
 
-- [Fundingly.in](https://kapilpidhwani.in/work/fundingly/) ([Live App](https://fundingly.in)): India's startup funding tracker and automated short-form media engine (`2,690+` verified rounds tracked across `21` quarterly tabs).
-  - **Skills Applied**: Product Management, SEO, Workflow Automation, UI/UX Design, Web Development, Market Research, Data Analysis, Google Sheets, Content Strategy, Competitive Analysis.
-- [Toolity.in](https://kapilpidhwani.in/work/toolity/) ([Live App](https://toolity.in)): Suite of `180` lightweight, zero-bloat browser utility tools across Media, Docs, Labs, Dev, Data and Games running 100% client-side.
-  - **Skills Applied**: Product Management, SEO, Workflow Automation, UI/UX Design, Web Development, Product Marketing, Prompt Engineering, User Research, Growth Strategy, Conversion Optimization.
-- [Google Think Travel](https://kapilpidhwani.in/work/think-travel-2026/): Google India's flagship summit for travel and hospitality leaders on AI across the traveller journey. Kapil owned communications and visual design from the first invite to the closing slide.
-  - **Skills Applied**: Event Marketing, Executive Communications, Brand Identity, Stakeholder Management, Content Strategy, UI/UX Design, Product Marketing, Market Research, Workflow Automation, Growth Strategy.
-- [ACCA Onboarding Redesign](https://kapilpidhwani.in/work/onboarding-redesign/): At Malhir Infinite Services (ACCA account, 2023), Kapil rebuilt an eight-week new-hire programme into a four-week blended cohort (20% theory, 80% floor). New-hire QA rose from about 60 to above 85; adopted as the India standard.
-  - **Skills Applied**: Training Design, Team Leadership, Operations, Process Design, Coaching, Stakeholder Management, Change Management, Customer Experience, Workflow Automation, Content Strategy.
-- [Amazon Rufus Rollout](https://kapilpidhwani.in/work/amazon-rufus-rollout/): Zero-to-one rollout of Amazon's Rufus AI shopping assistant to US childcare sellers in February 2024. Kapil pitched the concept, onboarded sellers and adjusted listings.
+- [Amazon Rufus Rollout](https://kapilpidhwani.in/work/amazon-rufus-rollout/) (`Transformation`): Zero-to-one rollout of Amazon's Rufus AI shopping assistant to US childcare sellers in February 2024. Kapil pitched the concept, onboarded sellers and tuned listings.
   - **Skills Applied**: Go-To-Market Strategy, Sales Enablement, Product Marketing, Stakeholder Management, Change Management, Customer Experience, Data Analysis, Content Strategy, Training Design, Growth Strategy.
+- [ACCA Onboarding Redesign](https://kapilpidhwani.in/work/onboarding-redesign/) (`Transformation`): At Mihir Infinite Services (ACCA account, 2023), Kapil rebuilt an eight-week new-hire programme into a four-week blended cohort (20% theory, 80% floor). New-hire QA rose from about 60 to above 85; adopted as the India standard.
+  - **Skills Applied**: Training Design, Team Leadership, Operations, Process Design, Coaching, Stakeholder Management, Change Management, Customer Experience, Workflow Automation, Content Strategy.
+- [Google Think Travel](https://kapilpidhwani.in/work/think-travel-2026/) (`Event`): Google India's flagship summit for travel and hospitality leaders on AI across the traveller journey. Kapil owned communications and visual design from the first invite to the closing slide.
+  - **Skills Applied**: Event Marketing, Executive Communications, Brand Identity, Stakeholder Management, Content Strategy, UI/UX Design, Product Marketing, Market Research, Workflow Automation, Growth Strategy.
+- [Fundingly.in](https://kapilpidhwani.in/work/fundingly/) (`Solution` · [Live](https://fundingly.in)): India's startup funding tracker and automated short-form media engine (`2,690+` verified rounds tracked across `21` quarterly tabs).
+  - **Skills Applied**: Product Management, SEO, Workflow Automation, UI/UX Design, Web Development, Market Research, Data Analysis, Google Sheets, Content Strategy, Competitive Analysis.
+- [Toolity.in](https://kapilpidhwani.in/work/toolity/) (`Solution` · [Live](https://toolity.in)): Suite of `180` lightweight, zero-bloat browser utility tools across Media, Docs, Labs, Dev, Data and Games running 100% client-side.
+  - **Skills Applied**: Product Management, SEO, Workflow Automation, UI/UX Design, Web Development, Product Marketing, Prompt Engineering, User Research, Growth Strategy, Conversion Optimization.
 
 ## Interactive Playbooks
 
@@ -32,12 +32,12 @@
 
 - **Google (Business Operations & Insights, 2025 - Present)**: Unlocked `$10M+` in incremental revenue from an underutilized market segment; architected `10+` AI-powered Apps Script web apps and Gemini workflows unifying `7+` fragmented data sources (`40+` hours/week saved); designed event systems and custom RSVP HTML mailer tooling for **Think Travel India 2026** (Google x Kantar summit).
 - **Amazon (Sales Enablement & Account Management, 2024 - 2025)**: Spearheaded rollout playbooks and sales pod training for **Amazon Rufus AI** across a `$600K+` US Children's Products portfolio; managed `50+` seller accounts at `95%+` CSAT and `+15%` retention.
-- **Mihir Infinite - Servicing ACCA (Operations Team Lead, 2022 - 2024)**: Directed a `25-person` operations unit at `112%` target KPI and `90%+` quality benchmark; reduced operational errors by `15%`.
+- **Mihir Infinite Services - Servicing ACCA (Operations Team Lead, 2022 - 2024)**: Directed a `25-person` operations unit at `112%` target KPI and `90%+` quality benchmark; reduced operational errors by `15%`.
 - **Nurseera (Lead Generation Specialist, 2020 - 2022)**: Qualified `500+` high-intent Fortune 500 US Healthcare targets per week (`+25%` pipeline growth).
 
 ## Core Skills & Capabilities
 
-Product Management, SEO, Workflow Automation, UI/UX Design, Web Development, Market Research, Data Analysis, Google Sheets, Content Strategy, Competitive Analysis, Product Marketing, Prompt Engineering, User Research, Growth Strategy, Conversion Optimization.
+Content Strategy, Workflow Automation, Data Analysis, Growth Strategy, Stakeholder Management, Product Marketing, UI/UX Design, Go-To-Market Strategy, Market Research, Product Management, Sales Enablement, Change Management, Training Design, SEO, Web Development.
 
 ## Direct Profiles & Contact
 
