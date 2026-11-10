@@ -1703,8 +1703,10 @@
     } else if (activeView === 'links') {
       const bentoCells = document.querySelectorAll('#links-hub .sf-links-bento-card').length;
       const playbooksCard = document.querySelector('#links-hub [data-nav-trigger="playbooks"]');
+      const topmateCard = document.querySelector('#links-hub a[href="https://topmate.io/kapilpidhwani"]');
+      const fiverrCard = document.querySelector('#links-hub a[href="https://www.fiverr.com/kapilpidhwani"]');
       const primaryLinksCta = document.getElementById('links-primary-cta');
-      console.assert(bentoCells === 5, 'Links stack must have 5 rows', bentoCells);
+      console.assert(bentoCells === 7 && Boolean(topmateCard) && Boolean(fiverrCard), 'Links stack must have 7 rows including Topmate and Fiverr', bentoCells);
       console.assert(playbooksCard && playbooksCard.textContent.indexOf('Presentations and Playbooks') !== -1, 'Playbooks row must exist and be named Presentations and Playbooks');
       console.assert(primaryLinksCta && primaryLinksCta.getAttribute('href').indexOf('linkedin.com/in/kapilpidhwani') !== -1, 'Primary Links CTA must point to LinkedIn');
     } else if (activeView === 'about') {
