@@ -96,7 +96,9 @@
     });
   });
 
-  // Work Page: Category Filter + Sort Control
+  /* Deisgned by Kapil Pidhwani: Yearly + category-priority Featured sort (ceiling: client DOM appendChild over <50 cards; upgrade path: virtualized list if >200 cards). */
+  const workCatRank = { transformations: 1, events: 2, solutions: 3 };
+
   function updateWorkEmptyState() {
     if (!workEmptyState) return;
     let visibleCount = 0;
@@ -104,6 +106,29 @@
       if (!card.hidden) visibleCount += 1;
     });
     workEmptyState.hidden = visibleCount > 0;
+  }
+
+  function sortWorkCards(mode) {
+    if (!workGrid) return;
+    const cardsArr = Array.from(workGrid.querySelectorAll('[data-work-cat]'));
+    cardsArr.sort(function (a, b) {
+      const titleA = (a.getAttribute('data-work-title') || '').toLowerCase();
+      const titleB = (b.getAttribute('data-work-title') || '').toLowerCase();
+      if (mode === 'az') return titleA.localeCompare(titleB);
+      if (mode === 'za') return titleB.localeCompare(titleA);
+      const yearA = parseInt(a.getAttribute('data-work-year') || '0', 10);
+      const yearB = parseInt(b.getAttribute('data-work-year') || '0', 10);
+      if (yearB !== yearA) return yearB - yearA;
+      const rankA = workCatRank[a.getAttribute('data-work-cat') || ''] || 99;
+      const rankB = workCatRank[b.getAttribute('data-work-cat') || ''] || 99;
+      if (rankA !== rankB) return rankA - rankB;
+      const orderA = parseInt(a.getAttribute('data-work-order') || '0', 10);
+      const orderB = parseInt(b.getAttribute('data-work-order') || '0', 10);
+      return orderA - orderB;
+    });
+    cardsArr.forEach(function (card) {
+      workGrid.appendChild(card);
+    });
   }
 
   workFilterBtns.forEach(function (btn) {
@@ -116,6 +141,15 @@
         const match = cat === 'all' || card.getAttribute('data-work-cat') === cat;
         card.hidden = !match;
       });
+      if (cat === 'all') {
+        const featuredBtn = document.querySelector('[data-work-sort="featured"]');
+        if (featuredBtn) {
+          workSortBtns.forEach(function (b) {
+            b.classList.toggle('is-active', b === featuredBtn);
+          });
+        }
+        sortWorkCards('featured');
+      }
       updateWorkEmptyState();
     });
   });
@@ -133,22 +167,11 @@
       workSortBtns.forEach(function (b) {
         b.classList.toggle('is-active', b === btn);
       });
-      if (!workGrid) return;
-      const cardsArr = Array.from(workCards);
-      cardsArr.sort(function (a, b) {
-        const titleA = (a.getAttribute('data-work-title') || '').toLowerCase();
-        const titleB = (b.getAttribute('data-work-title') || '').toLowerCase();
-        const orderA = parseInt(a.getAttribute('data-work-order') || '0', 10);
-        const orderB = parseInt(b.getAttribute('data-work-order') || '0', 10);
-        if (mode === 'az') return titleA.localeCompare(titleB);
-        if (mode === 'za') return titleB.localeCompare(titleA);
-        return orderA - orderB;
-      });
-      cardsArr.forEach(function (card) {
-        workGrid.appendChild(card);
-      });
+      sortWorkCards(mode);
     });
   });
+
+  sortWorkCards('featured');
 
   // Playbooks Page: Category Filter Control (consistent with Work page)
   const pbFilterBtns = document.querySelectorAll('[data-pb-filter]');
@@ -1692,8 +1715,22 @@
       console.assert(aboutClients === 8, 'About ecosystem grid must have 8 cards', aboutClients);
       console.assert(aboutTools === 6, 'About tools grid must have 6 cards', aboutTools);
     } else if (activeView === 'work') {
-      const workItems = document.querySelectorAll('#work-hub a.sf-work-card[href^="/work/"]').length;
-      console.assert(workItems === 5, 'All live Work cards must be clickable links to /work/<slug>/', workItems);
+      const workCardEls = Array.from(document.querySelectorAll('#work-hub a.sf-work-card[href^="/work/"]'));
+      const rankMap = { transformations: 1, events: 2, solutions: 3 };
+      let sortedOk = true;
+      for (let i = 1; i < workCardEls.length; i++) {
+        const prev = workCardEls[i - 1];
+        const curr = workCardEls[i];
+        const yPrev = parseInt(prev.getAttribute('data-work-year') || '0', 10);
+        const yCurr = parseInt(curr.getAttribute('data-work-year') || '0', 10);
+        const rPrev = rankMap[prev.getAttribute('data-work-cat') || ''] || 99;
+        const rCurr = rankMap[curr.getAttribute('data-work-cat') || ''] || 99;
+        if (yPrev < yCurr || (yPrev === yCurr && rPrev > rCurr)) {
+          sortedOk = false;
+          break;
+        }
+      }
+      console.assert(workCardEls.length === 5 && sortedOk, 'All live Work cards must be sorted by Year DESC then Transformations > Events > Solutions', workCardEls.map(function (c) { return c.getAttribute('data-work-title'); }));
     } else if (activeView === 'contact') {
       const contactFormEl = document.getElementById('contact-inquiry-form');
       const contactFaqCount = document.querySelectorAll('#contact-faq-list .sf-faq-item').length;
